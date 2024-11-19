@@ -15,10 +15,10 @@ import TextInputLogin from "../../components/LoginInput";
 import { styles } from "./style";
 import BotaoCriarConta from "../../components/LoginBotao2";
 
-export const Login = () => {
+export const Cadastrar = () => {
 
-  const login = () => {
-    Alert.alert("Login")
+  const cadastrar = () => {
+    Alert.alert("Cadastrar")
   }
 
   return (
@@ -36,10 +36,15 @@ export const Login = () => {
               alt="Logo Patas e Abraços"
             />
             <Text style={styles.titulo}>Patas e Abraços</Text>
-            <TextInputLogin placeholder="Nome de Usuário" typeIcon="username" />
+            <Text style={styles.titulo}>Cadastro</Text>
+            <View style={styles.a} />
+            <TextInputLogin placeholder="Nome" typeIcon="person" />
+            <TextInputLogin placeholder="Nome de usuário" typeIcon="username" />
+            <TextInputLogin placeholder="Email" typeIcon="email" />
             <TextInputLogin placeholder="Senha" typeIcon="password" hideInput={true} />
-            <BotaoLogin titulo="Entrar" handleFunction={login} />
-            <BotaoCriarConta titulo="Criar Conta" handleFunction={login}/>
+            <TextInputLogin placeholder="Confirmar Senha" typeIcon="password" hideInput={true} />
+            <BotaoLogin titulo="Cadastrar" handleFunction={cadastrar} />
+            <BotaoCriarConta titulo="Voltar" handleFunction={cadastrar}/>
           </View>
         </ImageBackground>
       </View>
