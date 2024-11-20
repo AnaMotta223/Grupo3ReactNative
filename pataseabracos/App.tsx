@@ -1,6 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Home } from './src/screens/Home';
+import { Loading } from './src/components/Loading';
 //import { Routers } from './src/routes';
 
 export default function App() {
@@ -9,7 +10,8 @@ export default function App() {
     <>
       <StatusBar style="auto" />
       {/* <Routers /> */}
-      <Home/>
+      {/* <Home/> */}
+      <Loading/>
     </>
   );
 }
