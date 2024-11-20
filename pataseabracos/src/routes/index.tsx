@@ -1,12 +1,11 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import StackRoutes from './StackRoutes'
+import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
+import StackRoutes from "./StackRoutes";
 
 export default function Routes() {
   return (
-    <NavigationContainer >
-        <StackRoutes />
+    <NavigationContainer>
+      <StackRoutes />
     </NavigationContainer>
-  )
+  );
 }

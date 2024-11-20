@@ -1,9 +1,9 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
-import { styles } from "./styles";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import React, { useState } from "react";
+import { TextInput, TouchableOpacity, View } from "react-native";
+import { styles } from "./styles";
 
 interface PropsInput {
   placeholder: string;
@@ -31,12 +31,17 @@ export default function TextInputLogin({
         placeholder={placeholder}
         placeholderTextColor={"#311A05"}
         secureTextEntry={typeIcon === "password" ? viewPassword : hideInput}
-        
       />
       <View style={styles.icon}>
-        {typeIcon === "person" && <FontAwesome5 name="user-alt" size={24} color="#311A05" />}
-        {typeIcon === "username" && <MaterialIcons name="alternate-email" size={24} color="#311A05" />}
-        {typeIcon === "email" && <MaterialIcons name="email" size={24} color="#311A05" />}
+        {typeIcon === "person" && (
+          <FontAwesome5 name="user-alt" size={24} color="#311A05" />
+        )}
+        {typeIcon === "username" && (
+          <MaterialIcons name="alternate-email" size={24} color="#311A05" />
+        )}
+        {typeIcon === "email" && (
+          <MaterialIcons name="email" size={24} color="#311A05" />
+        )}
         {typeIcon === "password" && (
           <TouchableOpacity onPress={() => setViewPassword(!viewPassword)}>
             {viewPassword ? (

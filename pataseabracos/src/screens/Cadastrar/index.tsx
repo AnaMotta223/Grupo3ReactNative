@@ -32,62 +32,56 @@ export const Cadastrar = () => {
     navigation.navigate("stackLogin");
   };
 
-  const verificar = async () => {
+  const verificar = () => {
+    if (
+      nome === "" ||
+      username === "" ||
+      email === "" ||
+      senha === "" ||
+      confirmaSenha === ""
+    ) {
+      Alert.alert("Todos os campos devem ser preenchidos");
+    } else if (senha !== confirmaSenha) {
+      Alert.alert("Senha e confirma Senha não são iguais");
+    }
+
     try {
-      if (
-        nome === "" ||
-        username === "" ||
-        email === "" ||
-        senha === "" ||
-        confirmaSenha === ""
-      ) {
-        Alert.alert("Todos os campos devem ser preenchidos");
-      } else if (senha !== confirmaSenha) {
-        Alert.alert("Senha e confirma Senha não são iguais");
-      }
+      axios
+        .get("https://6722c0392108960b9cc576f5.mockapi.io/usuarios")
+        .then((response) => {
+          const usuarioValido = response.data.find(
+            (user: any) => user.username === username 
+          );
 
-      try {
-        axios
-          .get("https://6722c0392108960b9cc576f5.mockapi.io/usuarios")
-          .then((response) => {
-            const usuarioValido = response.data.find(
-              (user: any) => user.username === username
-            );
+          if (usuarioValido) {
+            setUserValido(false);
+            Alert.alert("Erro", "Username já em uso");
+          } else {
+            setUserValido(true);
+          }
+        });
+    } catch (error) {
+      console.log("Erro ao consumir a api", error);
+    }
 
-            console.log("checou o user", username, usuarioValido);
+    try {
+      axios
+        .get("https://6722c0392108960b9cc576f5.mockapi.io/usuarios")
+        .then((response) => {
+          const usuarioValido = response.data.find(
+            (user: any) => user.email === email
+          );
 
-            if (usuarioValido) {
-              setUserValido(false);
-              Alert.alert("Erro", "Username já em uso");
-            } else {
-              setUserValido(true);
-            }
-          });
-      } catch (error) {
-        console.log("Erro ao consumir a api", error);
-      }
-
-      try {
-        axios
-          .get("https://6722c0392108960b9cc576f5.mockapi.io/usuarios")
-          .then((response) => {
-            const usuarioValido = response.data.find(
-              (user: any) => user.email === email
-            );
-
-            console.log("checou o email", email, usuarioValido);
-
-            if (usuarioValido) {
-              setEmailValido(false);
-              Alert.alert("Erro", "Email já em uso");
-            } else {
-              setEmailValido(true);
-            }
-          });
-      } catch (error) {
-        console.log("Erro ao consumir a api", error);
-      }
-    } catch (error) {}
+          if (usuarioValido) {
+            setEmailValido(false);
+            Alert.alert("Erro", "Email já em uso");
+          } else {
+            setEmailValido(true);
+          }
+        });
+    } catch (error) {
+      console.log("Erro ao consumir a api", error);
+    }
   };
 
   const cadastrar = async () => {
@@ -96,32 +90,18 @@ export const Cadastrar = () => {
       setEmailValido(false);
       setUserValido(false);
       try {
-        console.log("caiu no try");
-
-        const response = await fetch(
+        const response = await axios.post(
           "https://6722c0392108960b9cc576f5.mockapi.io/usuarios",
           {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              nome: nome,
-              username: username,
-              email: email,
-              senha: senha,
-            }),
+            nome: nome,
+            username: username,
+            email: email,
+            senha: senha,
           }
         );
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          console.log("Deu erro");
-        } else {
-          console.log("Deu certo");
-          navigation.navigate("stackHome");
-        }
+        navigation.navigate("stackHome");
       } catch (error) {
-        console.log("Erro ao conectar");
+        console.log("Erro na requisição ", error);
       }
     }
   };
