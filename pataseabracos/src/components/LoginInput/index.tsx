@@ -8,7 +8,7 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 interface PropsInput {
   placeholder: string;
   hideInput?: boolean;
-  valueInput?: string;
+  valueInput: string;
   handleFunctionInput?: (value: string) => void;
   typeIcon?: string;
 }
@@ -26,11 +26,12 @@ export default function TextInputLogin({
     <View style={styles.container}>
       <TextInput
         style={styles.input}
+        value={valueInput}
         onChangeText={handleFunctionInput}
         placeholder={placeholder}
         placeholderTextColor={"#311A05"}
-        secureTextEntry={typeIcon === "password" ? hideInput : viewPassword}
-        value={valueInput}
+        secureTextEntry={typeIcon === "password" ? viewPassword : hideInput}
+        
       />
       <View style={styles.icon}>
         {typeIcon === "person" && <FontAwesome5 name="user-alt" size={24} color="#311A05" />}
