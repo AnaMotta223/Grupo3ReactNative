@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 import React, { useState } from "react";
 import {
   Alert,
@@ -11,10 +13,9 @@ import {
 import imagemFundo from "../../assets/fundo25.png";
 import logo from "../../assets/logo.png";
 import BotaoLogin from "../../components/LoginBotao";
+import BotaoCriarConta from "../../components/LoginBotao2";
 import TextInputLogin from "../../components/LoginInput";
 import { styles } from "./style";
-import BotaoCriarConta from "../../components/LoginBotao2";
-import { useNavigation } from "@react-navigation/native";
 
 export const Login = () => {
   const navigation = useNavigation();
@@ -22,31 +23,40 @@ export const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
 
-  const login = () => {
+  const login = async () => {
     if (username === "" || senha === "") {
-      Alert.alert("Erro", "Preencha os campos!")
-    } else if (username !== "Julia" || senha !== "123") {
-      Alert.alert("Erro", "Usuário ou senha inválidos!")
+      Alert.alert("Erro", "Preencha os campos!");
     } else {
-      navigation.navigate('stackHome')
+      await axios
+        .get("https://6722c0392108960b9cc576f5.mockapi.io/usuarios")
+        .then((response) => {
+          const usuarioValido = response.data.find(
+            (user: any) => user.username === username && user.senha === senha
+          );
+
+          if (!usuarioValido) {
+            Alert.alert("Erro", "Usuário ou senha inválidos!");
+          } else {
+            navigation.navigate("stackHome");
+          }
+        })
+
+        .catch((error) => {
+          console.log("Erro ao consumir a api", error);
+        });
     }
+  };
 
-
-
-  }
-  
   const cadastrar = () => {
-    navigation.navigate('stackCadastrar')
-  }
+    navigation.navigate("stackCadastrar");
+  };
 
   const handleUsername = (value: string) => {
-    setUsername(value)
-  }
+    setUsername(value);
+  };
   const handleSenha = (value: string) => {
-    setSenha(value)
-  }
-
-
+    setSenha(value);
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -63,10 +73,21 @@ export const Login = () => {
               alt="Logo Patas e Abraços"
             />
             <Text style={styles.titulo}>Patas e Abraços</Text>
-            <TextInputLogin placeholder="Nome de Usuário" typeIcon="username" valueInput={username} handleFunctionInput={handleUsername}/>
-            <TextInputLogin placeholder="Senha" typeIcon="password" hideInput={true} valueInput={senha} handleFunctionInput={handleSenha}/>
+            <TextInputLogin
+              placeholder="Nome de Usuário"
+              typeIcon="username"
+              valueInput={username}
+              handleFunctionInput={handleUsername}
+            />
+            <TextInputLogin
+              placeholder="Senha"
+              typeIcon="password"
+              hideInput={true}
+              valueInput={senha}
+              handleFunctionInput={handleSenha}
+            />
             <BotaoLogin titulo="Entrar" handleFunction={login} />
-            <BotaoCriarConta titulo="Criar Conta" handleFunction={cadastrar}/>
+            <BotaoCriarConta titulo="Criar Conta" handleFunction={cadastrar} />
           </View>
         </ImageBackground>
       </View>

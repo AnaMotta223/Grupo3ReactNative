@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 import React, { useState } from "react";
 import {
   Alert,
@@ -15,7 +16,6 @@ import BotaoLogin from "../../components/LoginBotao";
 import BotaoCriarConta from "../../components/LoginBotao2";
 import TextInputLogin from "../../components/LoginInput";
 import { styles } from "./style";
-import axios from "axios";
 
 export const Cadastrar = () => {
   const navigation = useNavigation();
@@ -25,36 +25,104 @@ export const Cadastrar = () => {
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
   const [confirmaSenha, setConfirmaSenha] = useState<string>("");
+  const [emailValido, setEmailValido] = useState<boolean>(false);
+  const [userValido, setUserValido] = useState<boolean>(false);
 
   const login = () => {
     navigation.navigate("stackLogin");
   };
 
-  const cadastrar = () => {
-    if (
-      nome === "" ||
-      username === "" ||
-      email === "" ||
-      senha === "" ||
-      confirmaSenha === ""
-    ) {
-      Alert.alert("Todos os campos devem ser preenchidos");
-    } else if (username !== username) {
-      Alert.alert("Nome de usuário já em uso");
-    } else if (email !== email) {
-      Alert.alert("Email já em uso");
-    } else if (senha !== confirmaSenha) {
-      Alert.alert("Senha e confirma Senha não são iguais");
-    } else {
-      axios
-        .post("https://6722c0692108960b9cc578da.mockapi.io/usuarios")
-        .then(() => {
-          alert("Cadastro Efeituado!");
-        })
-        .catch(() => {
-          alert("Erro");
-        });
-      navigation.navigate("stackHome");
+  const verificar = async () => {
+    try {
+      if (
+        nome === "" ||
+        username === "" ||
+        email === "" ||
+        senha === "" ||
+        confirmaSenha === ""
+      ) {
+        Alert.alert("Todos os campos devem ser preenchidos");
+      } else if (senha !== confirmaSenha) {
+        Alert.alert("Senha e confirma Senha não são iguais");
+      }
+
+      try {
+        axios
+          .get("https://6722c0392108960b9cc576f5.mockapi.io/usuarios")
+          .then((response) => {
+            const usuarioValido = response.data.find(
+              (user: any) => user.username === username
+            );
+
+            console.log("checou o user", username, usuarioValido);
+
+            if (usuarioValido) {
+              setUserValido(false);
+              Alert.alert("Erro", "Username já em uso");
+            } else {
+              setUserValido(true);
+            }
+          });
+      } catch (error) {
+        console.log("Erro ao consumir a api", error);
+      }
+
+      try {
+        axios
+          .get("https://6722c0392108960b9cc576f5.mockapi.io/usuarios")
+          .then((response) => {
+            const usuarioValido = response.data.find(
+              (user: any) => user.email === email
+            );
+
+            console.log("checou o email", email, usuarioValido);
+
+            if (usuarioValido) {
+              setEmailValido(false);
+              Alert.alert("Erro", "Email já em uso");
+            } else {
+              setEmailValido(true);
+            }
+          });
+      } catch (error) {
+        console.log("Erro ao consumir a api", error);
+      }
+    } catch (error) {}
+  };
+
+  const cadastrar = async () => {
+    verificar();
+    if (emailValido && userValido) {
+      setEmailValido(false);
+      setUserValido(false);
+      try {
+        console.log("caiu no try");
+
+        const response = await fetch(
+          "https://6722c0392108960b9cc576f5.mockapi.io/usuarios",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              nome: nome,
+              username: username,
+              email: email,
+              senha: senha,
+            }),
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          console.log("Deu erro");
+        } else {
+          console.log("Deu certo");
+          navigation.navigate("stackHome");
+        }
+      } catch (error) {
+        console.log("Erro ao conectar");
+      }
     }
   };
 
@@ -92,7 +160,7 @@ export const Cadastrar = () => {
             <Text style={styles.titulo}>Cadastro</Text>
             <View style={styles.a} />
             <TextInputLogin
-              placeholder="Nome"
+              placeholder="Nome Completo"
               typeIcon="person"
               valueInput={nome}
               handleFunctionInput={handleNome}
