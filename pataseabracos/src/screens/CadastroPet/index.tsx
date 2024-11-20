@@ -1,10 +1,12 @@
-import { Text, View } from 'react-native'
+import { Text, View } from 'react'
 import React from 'react'
 
 export const CadastroPet = () => {
     return (
       <View>
-        <Text>index</Text>
+        <Text>
+
+        </Text>
       </View>
     )
 }
