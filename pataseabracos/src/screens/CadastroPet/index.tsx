@@ -6,12 +6,17 @@ import { styles } from "./style";
 import SelectDropdown from "react-native-select-dropdown";
 import SetaBaixo from "../../assets/setaBaixo.png";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 const tipos = ["Cachorro", "Gato", "Passaro", "Peixe", "Coelho", "Hamster"];
 
-const sexos = ["M", "F"];
+const sexos = ["Macho", "Fêmea"];
+
 
 export const CadastroPet = () => {
+
+  const navigation = useNavigation();
+
   const [tipoSelecionado, setTipoSelecionado] = useState<string | null>(null);
   const [sexoSelecionado, setSexoSelecionado] = useState<string | null>(null);
   const [nome, setNome] = useState("");
@@ -23,9 +28,12 @@ export const CadastroPet = () => {
 
   const handleCadastro = async () => {
     try {
+
+      const sexoConvertido = sexoSelecionado === "Macho" ? "M" : sexoSelecionado === "Fêmea" ? "F" : null;
+
       const dadosPet = {
         tipo: tipoSelecionado ? tipoSelecionado.toUpperCase() : null, 
-        sexo: sexoSelecionado,
+        sexo: sexoConvertido,
         nome,
         raca,
         idade,
@@ -50,7 +58,7 @@ export const CadastroPet = () => {
     <ImageBackground source={Fundo} style={styles.background}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate("TabHome")}>
             <Image source={Seta} style={styles.headerimg} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Cadastro de Animal</Text>
