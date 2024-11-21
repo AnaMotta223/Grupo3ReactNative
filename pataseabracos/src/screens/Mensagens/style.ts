@@ -11,12 +11,11 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
 
-  
   header: {
-    backgroundColor: '#B68458', 
+    backgroundColor: '#B68458',
     paddingVertical: 35,
     paddingHorizontal: 20,
-    gap:5,
+    gap: 5,
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
@@ -30,67 +29,113 @@ export const styles = StyleSheet.create({
   logo: {
     width: 50,
     height: 50,
-    marginTop:-20,
-    marginBottom:-40,
+    marginTop: -20,
+    marginBottom: -40,
   },
 
   cabecalho: {
-    alignItems:'center',
-    justifyContent: 'center',
     fontSize: 27,
     color: '#fff',
     marginLeft: 60,
     marginTop: 20,
-    padding: 0,
-    fontWeight: 'bold',
     
-
+    fontWeight: 'bold',
   },
 
-  
   messageCard: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    marginHorizontal: 20,
-    marginVertical: 10,
-    padding: 20,
+    marginHorizontal: 10,
+    marginVertical: 30,
     borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.5,
-    shadowRadius: 1.5,
-    elevation: 2, 
+    
   },
 
   messageIcon: {
-    width: 60,
-    height: 60,
-    marginRight: 10,
+    width: 90,
+    height: 90,
+    marginBottom:10,
+    marginRight: -40,
+    alignSelf: 'auto',
+    borderRadius:45,
   },
 
   messageName: {
     fontWeight: 'bold',
     fontSize: 20,
-    color: '#333',
+    color: '#666',
+    textAlign: 'center',
+   
   },
 
   messageText: {
     fontSize: 17,
     color: '#666',
+    textAlign: 'center',        
+   // width: '80%',
+    marginTop: 10, 
+    marginBottom: 10,
+    marginLeft: 45,
+    
+    
+    
+  
+  },
+
+  popupButton: {
+    backgroundColor: '#708D73',  
+    paddingVertical: 10,
+    borderRadius: 50,
+    paddingLeft: 10,
+    width: '75%', 
+    marginBottom: 10,
+    marginLeft: 40,
+  },
+
+  popupButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
   },
 
   
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#B68458',
-    paddingVertical: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',  
   },
 
-  footerIcon: {
-    width: 25,
-    height: 25,
-  },
+  modalContent: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+    alignItems: 'center',
+  },
+
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+  },
+
+  modalImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10,
+  },
+
+  modalMessage: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 20,
+    
+    
+  },
+
+ 
 });
