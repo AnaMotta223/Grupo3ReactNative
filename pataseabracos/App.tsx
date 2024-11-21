@@ -10,8 +10,8 @@ export default function App() {
     <>
       <StatusBar style="auto" />
       {/* <Routers /> */}
-      {/* <Home/> */}
-      <Loading/>
+      <Home/>
+      {/* <Loading/> */}
     </>
   );
 }

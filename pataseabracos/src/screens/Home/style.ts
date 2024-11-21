@@ -3,71 +3,105 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems:"flex-start"
+    alignItems: "flex-start",
   },
 
-  imagemdeFundo:{
+  imagemdeFundo: {
     flex: 1,
-    width:"100%"
-},
-
-logoContainer:{
-  alignItems:"flex-start",
-  justifyContent:"flex-start",
-  width:"30%"
-},
-
-  logo:{
-    width:40,
-    height:40,
+    width: "100%"
   },
 
-  header:{
+  logoContainer: {
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    width: "30%",
+  },
+
+  logo: {
+    width: 40,
+    height: 40,
+  },
+
+  header: {
+    paddingTop: 30,
     width: "100%",
-    alignItems:"center",
+    alignItems: "center",
     backgroundColor: "#B68458",
     paddingVertical: 20,
     paddingHorizontal: 20,
-    flexDirection:"row"
+    flexDirection: "row",
   },
 
-  cabecalho:{
-    alignSelf:"center",
-    justifyContent:"center",
-    fontSize: 22,
-    color:"#000"
+  cabecalho: {
+    fontFamily: "ZillaSlab_700Bold",
+    alignSelf: "center",
+    justifyContent: "center",
+    fontSize: 24,
+    color: "#000",
   },
 
-  tituloContainer:{
-    alignItems:"center",
-    paddingTop: 20
-
-  },
-
-  titulo:{
-    fontSize:40,
-    color:"black"
-  },
-  btnContainer:{
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
+  tituloContainer: {
+    gap: 10,
+    alignItems: "center",
     paddingTop: 20,
-    flexDirection:"row"
   },
 
-  boxAnimais:{
-    width: "33%",
-    height: 70,
-    alignItems:"center",
-    justifyContent:"center",
-    backgroundColor: '#B89371',
-    padding: 20,
-    borderRadius: 50,
-    marginTop: 10,
+  titulo: {
+    fontFamily: "ZillaSlab_700Bold",
+    fontSize: 40,
+    color: "#000",
   },
-  tiposAnimais:{
+  boxPesquisar: {
+    flexDirection: "row",
+    alignSelf: "center"
+  },
+  pesquisarInput: {
+    fontFamily: "ZillaSlab_400Regular",
+    fontWeight: 700,
+    fontSize: 19,
+    paddingHorizontal: 40,
+    backgroundColor: "#F7EDD5",
+    width: "80%",
+    height: 47,
+    borderRadius: 22,
+  },
+  tiposAnimais: {
     fontSize: 22,
-    color:"#FFF"
+    color: "#FFF",
   },
-
+  cards: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 7,
+    marginBottom: 15,
+  },
+  boxCard: {
+    width: 250,
+    backgroundColor: "#F3E6CE",
+    paddingBottom: 20,
+    borderRadius: 10,
+    marginTop: 20,
+    gap: 2,
+  },
+  elevation: {
+    elevation: 8,
+    shadowColor: "#000",
+  },
+  boxInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+  name: {
+    fontFamily: "ZillaSlab_700Bold",
+    fontSize: 25,
+  },
+  pet: {
+    alignSelf: "center",
+    width: 250,
+    height: 200,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
+  },
 });
