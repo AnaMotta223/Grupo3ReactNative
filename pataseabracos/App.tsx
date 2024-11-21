@@ -1,21 +1,15 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Mensagens } from './src/screens/Mensagens';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import Routes from "./src/routes";
 
-
-//import { Routers } from './src/routes';
 
 export default function App() {
-
   return (
     <>
       <StatusBar style="auto" />
-       <Mensagens/> 
-      
 
-
+      <Routes />
       
-      {/* <Routers /> */}
     </>
   );
 }
