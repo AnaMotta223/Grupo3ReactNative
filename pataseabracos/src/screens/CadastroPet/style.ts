@@ -86,7 +86,7 @@ export const styles = StyleSheet.create({
     marginRight: 8,
   },
   dropdownMenuStyle: {
-    backgroundColor: '#F7EDD5',
+    backgroundColor: '#FFF',
     borderRadius: 8,
   },
   dropdownItemStyle: {
@@ -114,6 +114,10 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 5,
     borderRadius: 17.86,
+  },
+
+  selectedTextStyle:{
+    color: "#000000", 
   }
 
 

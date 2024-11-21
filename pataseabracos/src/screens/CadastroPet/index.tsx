@@ -1,58 +1,50 @@
-import {
-  Image,
-  ImageBackground,
-  Text,
-  TextInput,
-  TextInputComponent,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import {Image,ImageBackground,Text,TextInput,TouchableOpacity, View,} from "react-native";
 import React, { useState } from "react";
 import Fundo from "../../assets/fundoClaro2.jpg";
 import Seta from "../../assets/seta.png";
 import { styles } from "./style";
 import SelectDropdown from "react-native-select-dropdown";
-import SetaBaixo from '../../assets/setaBaixo.png' 
+import SetaBaixo from "../../assets/setaBaixo.png";
+import axios from "axios";
 
-type Emoji = {
-  title: string;
-};
+const tipos = ["Cachorro", "Gato", "Passaro", "Peixe", "Coelho", "Hamster"];
 
-const tipos = [
-  {
-    title: "CACHORRO",
-  },
-  {
-    title: "GATO",
-  },
-  {
-    title: "PASSARO",
-  },
-  {
-    title:'PEIXE',
-  },
-  {
-    title:'COELHO',
-  },
-  {
-    title:'HAMSTER',
-  },
-
-];
-
-const sexos = [
-    {
-      title:'MACHO',
-    },
-    {
-      title:'FEMEA'
-    }
-
-];
+const sexos = ["M", "F"];
 
 export const CadastroPet = () => {
+  const [tipoSelecionado, setTipoSelecionado] = useState<string | null>(null);
+  const [sexoSelecionado, setSexoSelecionado] = useState<string | null>(null);
+  const [nome, setNome] = useState("");
+  const [raca, setRaca] = useState("");
+  const [idade, setIdade] = useState("");
+  const [peso, setPeso] = useState("");
+  const [observacao, setObservacoes] = useState("");
+  const [localidade, setLocalidade] = useState("");
 
-  const [tipoSelecionado, setTipoSelecionado] = useState<Emoji | null>(null)
+  const handleCadastro = async () => {
+    try {
+      const dadosPet = {
+        tipo: tipoSelecionado ? tipoSelecionado.toUpperCase() : null, 
+        sexo: sexoSelecionado,
+        nome,
+        raca,
+        idade,
+        peso,
+        observacao,
+        localidade,
+      };
+
+      console.log("Enviando dados:", dadosPet);
+
+      const response = await axios.post("http://192.168.0.9:8080/animais", dadosPet);
+      console.log("Resposta da API:", response.data);
+
+      alert("Pet cadastrado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao cadastrar o pet:", error);
+      alert("Erro ao cadastrar o pet. Tente novamente.");
+    }
+  };
 
   return (
     <ImageBackground source={Fundo} style={styles.background}>
@@ -64,87 +56,103 @@ export const CadastroPet = () => {
           <Text style={styles.headerTitle}>Cadastro de Animal</Text>
         </View>
         <View style={styles.content}>
-        
-        <View style={styles.dropDownCard}>
-        <SelectDropdown 
-        
-    data={tipos}
-    onSelect={(selectedItem, index) => {
-      console.log(selectedItem, index);
-    }}
-    renderButton={(selectedItem, isOpened) => {
-      return (
-        <View style={styles.dropdownButtonStyle}>
-   
-          <Text style={styles.dropdownButtonTxtStyle}>
-            {(selectedItem && selectedItem.title) || 'Tipos:'} 
-          </Text>
-          <Image source={SetaBaixo}  />
-          
-        </View>
-      );
-    }}
-    renderItem={(item, index, isSelected) => {
-      return (
-        <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#708D73'})}}>
-         
-          <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
-        </View>
-      );
-    }}
-    showsVerticalScrollIndicator={false}
-    dropdownStyle={styles.dropdownMenuStyle}
-  />
-  </View>
+          <View style={styles.dropDownCard}>
+            <SelectDropdown
+              data={tipos}
+              onSelect={(selectedItem) => setTipoSelecionado(selectedItem)}
+              renderButton={(selectedItem) => (
+                <View style={styles.dropdownButtonStyle}>
+                  <Text style={[styles.dropdownButtonTxtStyle,selectedItem && styles.selectedTextStyle]}>
+                    {selectedItem || "Tipos:"}
+                  </Text>
+                  <Image source={SetaBaixo} />
+                </View>
+              )}
+              renderItem={(item, index, isSelected) => (
+                <View
+                  style={{
+                    ...styles.dropdownItemStyle,
+                    ...(isSelected && { backgroundColor: "#708D73" }),
+                  }}
+                >
+                  <Text style={styles.dropdownItemTxtStyle}>{item}</Text>
+                </View>
+              )}
+              showsVerticalScrollIndicator={false}
+              dropdownStyle={styles.dropdownMenuStyle}
+            />
+          </View>
 
-          <TextInput style={styles.contentInput} placeholder="Nome:" />
+          <TextInput
+            style={styles.contentInput}
+            placeholder="Nome:"
+            value={nome}
+            onChangeText={setNome}
+          />
 
-          <TextInput style={styles.contentInput} placeholder="Raça:" />
+          <TextInput
+            style={styles.contentInput}
+            placeholder="Raça:"
+            value={raca}
+            onChangeText={setRaca}
+          />
 
           <View style={styles.dropDownCard}>
-        <SelectDropdown 
-        
-    data={sexos}
-    onSelect={(selectedItem, index) => {
-      console.log(selectedItem, index);
-    }}
-    renderButton={(selectedItem, isOpened) => {
-      return (
-        <View style={styles.dropdownButtonStyle}>
-   
-          <Text style={styles.dropdownButtonTxtStyle}>
-            {(selectedItem && selectedItem.title) || 'Sexo:'}
-          </Text>
-          <Image source={SetaBaixo}  />
-          
+            <SelectDropdown
+              data={sexos}
+              onSelect={(selectedItem) => setSexoSelecionado(selectedItem)}
+              renderButton={(selectedItem) => (
+                <View style={styles.dropdownButtonStyle}>
+                  <Text style={[styles.dropdownButtonTxtStyle,selectedItem && styles.selectedTextStyle]}>
+                    {selectedItem || "Sexo:"}
+                  </Text>
+                  <Image source={SetaBaixo} />
+                </View>
+              )}
+              renderItem={(item, index, isSelected) => (
+                <View
+                  style={{
+                    ...styles.dropdownItemStyle,
+                    ...(isSelected && { backgroundColor: "#708D73" }),
+                  }}
+                >
+                  <Text style={styles.dropdownItemTxtStyle}>{item}</Text>
+                </View>
+              )}
+              showsVerticalScrollIndicator={false}
+              dropdownStyle={styles.dropdownMenuStyle}
+            />
+          </View>
+
+          <TextInput
+            style={styles.contentInput}
+            placeholder="Idade:"
+            value={idade}
+            onChangeText={setIdade}
+          />
+
+          <TextInput
+            style={styles.contentInput}
+            placeholder="Peso:"
+            value={peso}
+            onChangeText={setPeso}
+          />
+
+          <TextInput
+            style={styles.contentInput}
+            placeholder="Observações:"
+            value={observacao}
+            onChangeText={setObservacoes}
+          />
+
+          <TextInput
+            style={styles.contentInput}
+            placeholder="Localidade:"
+            value={localidade}
+            onChangeText={setLocalidade}
+          />
         </View>
-      );
-    }}
-    renderItem={(item, index, isSelected) => {
-      return (
-        <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#708D73'})}}>
-         
-          <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
-        </View>
-      );
-    }}
-    showsVerticalScrollIndicator={false}
-    dropdownStyle={styles.dropdownMenuStyle}
-  />
-  </View>
-
-
-         
-
-          <TextInput style={styles.contentInput} placeholder="Idade:" />
-
-          <TextInput style={styles.contentInput} placeholder="Peso:" />
-
-          <TextInput style={styles.contentInput} placeholder="Observações:" />
-
-          <TextInput style={styles.contentInput} placeholder="Localidade:" />
-        </View>
-        <TouchableOpacity style={styles.footerBottom}>
+        <TouchableOpacity style={styles.footerBottom} onPress={handleCadastro}>
           <View style={styles.footer}>
             <Text style={styles.footerText}>Cadastrar</Text>
           </View>
