@@ -19,20 +19,24 @@ export const styles = StyleSheet.create({
   box: {
     backgroundColor: "#D2C2A4",
     width: "90%",
-    height: 550,
+    height: 700,
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
   },
 
   logo: {
-    width: 100,
-    height: 100,
+    width: 90,
+    height: 90,
+    margin: 15,
   },
 
   titulo: {
-    fontSize: 30,
+    fontSize: 27,
     fontWeight: "bold",
-    margin: 25,
+  },
+
+  a: {
+    height: 15,
   },
 });

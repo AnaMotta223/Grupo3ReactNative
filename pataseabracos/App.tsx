@@ -1,14 +1,11 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { PerfilUsuario } from './src/screens/Perfil';
-import { Routes } from './src/routes';
-//import { Routers } from './src/routes';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import Routes from "./src/routes";
 
 export default function App() {
-
   return (
     <>
-      {/* <PerfilUsuario/> */}
+      <StatusBar style="auto" />
       <Routes />
     </>
   );
