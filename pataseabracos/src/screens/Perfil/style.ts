@@ -74,7 +74,24 @@ export const styles = StyleSheet.create({
     paddingLeft: 10,
     width: "100%",
     marginBottom: 90,
-    fontSize: 3
+
+    fontSize: 3,
+    alignItems: "center",
+    
+  },
+
+  contentCardBottonConfig: {
+    backgroundColor: "#708D73",
+    margin: 5,
+    width: 200,
+    height: 20,
+    alignItems: "center",
+    borderRadius: 10
+  },
+
+  bottonConfigText:{
+    textAlign: "center"
+
   },
 
   cardTitle: {
@@ -84,7 +101,10 @@ export const styles = StyleSheet.create({
   },
 
 
-  contentCardButton: {},
+
+  contentCardButton: {
+  },
+
 
   footer: {
     backgroundColor: "#708D73",
@@ -105,5 +125,9 @@ export const styles = StyleSheet.create({
 
   footerBotton:{
     alignSelf: "center",
-  }
+
+  },
+
+ 
+
 });
