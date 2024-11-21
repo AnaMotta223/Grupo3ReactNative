@@ -25,7 +25,10 @@ export function TabRoutes() {
     >
       <Tab.Screen
         options={{
-          tabBarIcon: ({ color }) => (
+
+          tabBarIcon: ({  }) => (
+
+
             <Image style={styles.navigatorIcons} source={House}></Image>
           ),
         }}
@@ -35,9 +38,16 @@ export function TabRoutes() {
 
       <Tab.Screen
         options={{
-          tabBarIcon: ({ color }) => (
+
+          tabBarIcon: ({  }) => (
             <Image style={styles.navigatorIcons} source={Add}></Image>
           ),
+          tabBarStyle:{
+            display:'none'
+          }
+
+
+
         }}
         name="Cadastrar"
         component={CadastroPet}
@@ -45,7 +55,10 @@ export function TabRoutes() {
 
       <Tab.Screen
         options={{
-          tabBarIcon: ({ color }) => (
+
+          tabBarIcon: ({  }) => (
+
+
             <Image style={styles.navigatorIcons} source={Chat}></Image>
           ),
         }}
@@ -55,7 +68,10 @@ export function TabRoutes() {
 
       <Tab.Screen
         options={{
-          tabBarIcon: ({ color }) => (
+
+          tabBarIcon: ({  }) => (
+
+
             <Image style={styles.navigatorIcons} source={Profile}></Image>
           ),
         }}

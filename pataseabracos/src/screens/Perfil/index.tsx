@@ -12,6 +12,7 @@ import { styles } from "./style";
 import Fundo from "../../assets/fundoClaro2.jpg";
 import GatoFundo from "../../assets/gatoFundo.png";
 import Perfil from "../../assets/fotoPerfil.png";
+
 import Cima from "../../assets/setaCima.png";
 import Baixo from "../../assets/setaBaixo.png";
 import * as ImagePicker from "expo-image-picker";
@@ -19,6 +20,7 @@ import * as ImagePicker from "expo-image-picker";
 export const PerfilUsuario = () => {
   
   // Parte dos cards
+
   const [isAdocoesOpen, setIsAdocoesOpen] = useState(false);
   const [isAnimaisOpen, setIsAnimaisOpen] = useState(false);
   const [isConfiguracoesOpen, setIsConfiguracoesOpen] = useState(false);
@@ -34,6 +36,7 @@ export const PerfilUsuario = () => {
   const toggleConfiguracoes = () => {
     setIsConfiguracoesOpen(!isConfiguracoesOpen);
   };
+
 
   // Parte da seleção de imagem
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
@@ -205,6 +208,7 @@ export const PerfilUsuario = () => {
           </TouchableOpacity>
         </ScrollView>
       </View>
+
     </ImageBackground>
   );
 };
