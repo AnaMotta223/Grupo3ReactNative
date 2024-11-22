@@ -12,51 +12,14 @@ import { ServiceGetAnimais } from '../../service/ServiceGetAnimais'
 import { useFonts, ZillaSlab_400Regular, ZillaSlab_700Bold  } from '@expo-google-fonts/zilla-slab'
 import { useAuth } from '../../hooks/useAuth'
 
-interface ResponseApi {
-  id: number;
-  nome: string;
-  raca: string;
-  tipo: string;
-  usernameDono: string;
-}
-
-export const AnimaisCadastrados = () => {
-  const [animais, setAnimais] = useState<ResponseApi[]>([]);
-  const [isLoading, setIsloading] = useState<boolean>(false);
-  const { username } = useAuth();
+export const AnimaisAdotados = () => {
+  const [ isLoading, setIsLoading ] = useState<boolean>(false);
+  const { adocoes = [] } = useAuth();
   const [fontLoaded] = useFonts({
     ZillaSlab_400Regular,
     ZillaSlab_700Bold,
   });
 
-  const loadApi = async () => {
-    setIsloading(true);
-
-    const response = await ServiceGetAnimais();
-
-    if (response && response.status === 200) {
-      
-      const getAnimais = response.data;
-      
-      const animaisCadastrados = getAnimais.some((animal) => animal.usernameDono === username);
-    
-      if(animaisCadastrados) {
-        setAnimais(getAnimais);
-      }
-      else {
-        console.log("falso");
-        
-      }
-    
-    } else {
-      console.log("Erro na requisição");
-    }
-    setIsloading(false);
-  };
-
-  useEffect(() => {
-    loadApi();
-  }, [])
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -77,7 +40,7 @@ export const AnimaisCadastrados = () => {
         </View>
   
         <View style={styles.tituloContainer}>
-          <Text style={styles.titulo}>Seus animais cadastrados</Text>
+          <Text style={styles.titulo}>Seus animais adotados</Text>
         </View>
   
         <View style={styles.cards}>
@@ -86,7 +49,7 @@ export const AnimaisCadastrados = () => {
           ) : (
             <FlatList
               showsVerticalScrollIndicator={false}
-              data={animais}
+              data={adocoes}
               keyExtractor={item => item.id.toString()}
               renderItem={({ item }) => (
                 <View style={[styles.boxCard, styles.elevation]}>

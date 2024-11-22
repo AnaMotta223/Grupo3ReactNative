@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, Image, ImageBackground, Keyboard, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native'
+import { ActivityIndicator, Button, FlatList, Image, ImageBackground, Keyboard, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { styles } from './style'
 import fundoEscuro from '../../assets/fundoEscuro.jpg'
@@ -12,6 +12,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { ServiceGetAnimais } from '../../service/ServiceGetAnimais'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useFonts, ZillaSlab_400Regular, ZillaSlab_700Bold  } from '@expo-google-fonts/zilla-slab'
+import { PropsApi, useAuth } from '../../hooks/useAuth'
 interface ResponseApi {
   id: number;
   nome: string;
@@ -25,6 +26,7 @@ export const Home = () => {
   const [animais, setAnimais] = useState<ResponseApi[]>([]);
   const [isLoading, setIsloading] = useState<boolean>(false);
   const [busca, setBusca] = useState<string>("");
+  const { adocoes, setAdocoes } = useAuth();
   const [fontLoaded] = useFonts({
     ZillaSlab_400Regular,
     ZillaSlab_700Bold,
@@ -33,6 +35,22 @@ export const Home = () => {
   const handleInputChange = (value: string) => {
     setBusca(value);
   };
+
+  const handleAdocoes = (value: PropsApi) => {
+    const id = adocoes.findIndex(item => String(item.id) === String(value.id))
+    //console.log(value.id);
+    
+
+    if(id !== -1){
+      console.log("id igual");
+      
+      setAdocoes(adocoes.filter(item => item.id !== value.id))
+    }
+    else{
+      console.log("adicionado");
+      setAdocoes([...adocoes, value])
+    }
+  }
 
   const loadApi = async () => {
     setIsloading(true);
@@ -139,6 +157,11 @@ export const Home = () => {
                   <View style={styles.boxInfo}>
                     <Text style={styles.name}>{`${item.nome},`}</Text>
                     <Text style={styles.name}>{item.raca}</Text>
+                    <TouchableOpacity onPress={() => handleAdocoes(item)}>
+                      <Text>
+                        Botao
+                      </Text>
+                      </TouchableOpacity>
                   </View>
                 </View>
               )}

@@ -3,26 +3,31 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { useContext, createContext, useState, useEffect } from 'react'
 
+export interface PropsApi {
+        id: number,
+        nome: string,
+        tipo: string,
+        raca: string
+}
+
 type PropsContext = {
   username: string;
-  //senha: string;
   setUsername: (value: string) => void;
   checkAuthentication: (email: string) => void;
   handleLogOut: () => void;
   isLoading: boolean;
-  //userApi: PropsApi;
+  adocoes: PropsApi[];
+  setAdocoes: (value: PropsApi[]) => void;
 }
 
 const AuthContext = createContext<PropsContext>({
   username: '',
   setUsername: () => { },
-  //senha: '',
+  setAdocoes: () => { },
   checkAuthentication: () => { },
   handleLogOut: () => { },
   isLoading: false,
-  //userApi: {
-   // adocoes: []
-  //}
+  adocoes: []
 })
 
 export const AuthProvider = ({ children }: any) => {
@@ -30,8 +35,8 @@ export const AuthProvider = ({ children }: any) => {
   const navigation = useNavigation();
 
   const [username, setUsername] = useState<string>('');
-  //const [ senha ] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [ adocoes, setAdocoes ] = useState<PropsApi[]>([]);
 
   const checkAuthentication = (username: string) => {
     setIsLoading(true);
@@ -42,56 +47,69 @@ export const AuthProvider = ({ children }: any) => {
           navigation.navigate("stackHome");
         }, 3000);
       }
-    }
+      setIsLoading(false);
+};
   
-  const handleLogOut = () => {
-    AsyncStorage.removeItem('@User');
-    navigation.navigate("stackLogin");
+const handleLogOut = () => {
+  AsyncStorage.removeItem('@User');
+  navigation.navigate("stackLogin");
+}
+
+const storeData = async (username: string, adocoes?: PropsApi[]) => {
+  try {
+    const jsonValueUser = JSON.stringify(username);
+    const jsonValueAnimal = JSON.stringify(adocoes);
+    await AsyncStorage.setItem('@User', jsonValueUser);
+    await AsyncStorage.setItem('@Animal', jsonValueAnimal);
+
+    // const jsonValueUser = JSON.stringify({username, adocoes});
+    // await AsyncStorage.setItem('@User', jsonValueUser);
+
+  } catch (error) {
+    console.log('Erro ao salvar dados!');
   }
+};
 
-  const storeData = async (username: string) => {
-    try {
-      const jsonValue = JSON.stringify(username);
-      await AsyncStorage.setItem('@User', jsonValue);
 
-    } catch (error) {
-      console.log('Erro ao salvar dados!');
+//verificar se tem login pelo username
+const getData = async () => {
+  setIsLoading(true);
+  try {
+    const value = await AsyncStorage.getItem('@User');
+    if (value !== null) {
+      const jsonValue = JSON.parse(value);
+      setUsername(jsonValue);
     }
-  };
 
-  //verificar se tem login pelo username
-  const getData = async () => {
-    setIsLoading(true);
-    try {
-      const value = await AsyncStorage.getItem('@User');
-      if (value !== null) {
-        const jsonValue = JSON.parse(value);
-        console.log('Pegou os dados', jsonValue);
-        navigation.navigate("stackHome");
-      }
-    } catch (error) {
-      console.log('Erro ao buscar dados!');
+    const valueAnimais = await AsyncStorage.getItem('@Animal');
+    if (valueAnimais !== null) {
+      const jsonValue = JSON.parse(valueAnimais);
+      setAdocoes(jsonValue);
     }
-    setIsLoading(false);
-  };
+    navigation.navigate("stackHome");
+  } catch (error) {
+    console.log('Erro ao buscar dados!');
+  }
+  setIsLoading(false);
+};
 
-  useEffect(() => {
-    getData();
-  }, []);
+useEffect(() => {
+  getData();
+}, []);
 
-  return (
-    <AuthContext.Provider value={{
-        username,
-        //senha,
-        setUsername,
-        checkAuthentication,
-        handleLogOut,
-        isLoading,
-        //userApi
-    }}>
-      {children}
-    </AuthContext.Provider>
-  )
+return (
+  <AuthContext.Provider value={{
+      username,
+      setUsername,
+      checkAuthentication,
+      handleLogOut,
+      isLoading,
+      adocoes,
+      setAdocoes
+  }}>
+    {children}
+  </AuthContext.Provider>
+)
 }
 
 export const useAuth = () => useContext(AuthContext);
