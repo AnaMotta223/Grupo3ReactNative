@@ -56,10 +56,9 @@ export const Home = () => {
     animal.tipo.toLowerCase().includes(busca.toLowerCase())
   );
 
-    return (
-      <View style={styles.container}>
-        
-        <ImageBackground 
+  return (
+    <View style={styles.container}>
+      <ImageBackground 
         blurRadius={6}
         style={styles.imagemdeFundo}
         resizeMode="cover"
@@ -73,54 +72,74 @@ export const Home = () => {
             <Text style={styles.cabecalho}>Patas e Abraços</Text>
           </View>
         </View>
-
+  
         <View style={styles.tituloContainer}>
-          <Text style={styles.titulo}> Animais para adoção</Text>
+          <Text style={styles.titulo}>Animais para adoção</Text>
           <View style={styles.boxPesquisar}>
-          <Ionicons style={{transform: [{ translateX: 35}], zIndex: 999, marginTop: 8}} name="search" size={28} color="#B68458" />
-          <TextInput style={[styles.pesquisarInput]} value={busca} onChangeText={handleInputChange} placeholder='Pesquisar' placeholderTextColor={"#B68458"}/>
+            <Ionicons 
+              style={{ transform: [{ translateX: 35 }], zIndex: 999, marginTop: 8 }} 
+              name="search" 
+              size={28} 
+              color="#B68458" 
+            />
+            <TextInput 
+              style={[styles.pesquisarInput]} 
+              value={busca} 
+              onChangeText={handleInputChange} 
+              placeholder="Pesquisar" 
+              placeholderTextColor="#B68458" 
+            />
           </View>
         </View>
-
-          <View style={styles.cards}>
-            {isLoading ? (
-           <ActivityIndicator/>
-            ) : (
-              <FlatList
-                showsVerticalScrollIndicator={false}
-                data={animaisFiltrados}
-                keyExtractor={item => item.id.toString()}
-                renderItem={({ item }) =>
-                  <View style={[styles.boxCard, styles.elevation]}>
-                    {item.tipo.toUpperCase() === "CACHORRO" &&
-                    <Image style={styles.pet}
-                    source={cachorro}
-                    alt="Desenho de um cachorro" />
-                    } 
-                    {item.tipo.toUpperCase() === "GATO" &&
-                    <Image style={styles.pet}
-                    source={gato}
-                    alt="Desenho de um gato" />
-                    } 
-                    {item.tipo.toUpperCase() === "HAMSTER" &&
-                    <Image style={styles.pet}
-                    source={hamster}
-                    alt="Desenho de um hamster" />
-                    } 
-                    {item.tipo.toUpperCase() === "PEIXE" &&
-                    <Image style={styles.pet}
-                    source={peixe}
-                    alt="Desenho de um peixe" />
-                    } 
-                    {item.tipo.toUpperCase() === "PASSARO" &&
-                    <Image style={styles.pet}
-                    source={passaro}
-                    alt="Desenho de um pássaro" />
-                    } 
-                    <View style={styles.boxInfo}>
-                      <Text style={styles.name}>{`${item.nome},`}</Text>
-                      <Text style={styles.name}>{item.raca}</Text>
-                    </View>
+  
+        <View style={styles.cards}>
+          {isLoading ? (
+            <ActivityIndicator />
+          ) : (
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={animaisFiltrados}
+              keyExtractor={item => item.id.toString()}
+              renderItem={({ item }) => (
+                <View style={[styles.boxCard, styles.elevation]}>
+                  {item.tipo.toUpperCase() === "CACHORRO" && (
+                    <Image 
+                      style={styles.pet} 
+                      source={cachorro} 
+                      alt="Desenho de um cachorro" 
+                    />
+                  )}
+                  {item.tipo.toUpperCase() === "GATO" && (
+                    <Image 
+                      style={styles.pet} 
+                      source={gato} 
+                      alt="Desenho de um gato" 
+                    />
+                  )}
+                  {item.tipo.toUpperCase() === "HAMSTER" && (
+                    <Image 
+                      style={styles.pet} 
+                      source={hamster} 
+                      alt="Desenho de um hamster" 
+                    />
+                  )}
+                  {item.tipo.toUpperCase() === "PEIXE" && (
+                    <Image 
+                      style={styles.pet} 
+                      source={peixe} 
+                      alt="Desenho de um peixe" 
+                    />
+                  )}
+                  {item.tipo.toUpperCase() === "PASSARO" && (
+                    <Image 
+                      style={styles.pet} 
+                      source={passaro} 
+                      alt="Desenho de um pássaro" 
+                    />
+                  )}
+                  <View style={styles.boxInfo}>
+                    <Text style={styles.name}>{`${item.nome},`}</Text>
+                    <Text style={styles.name}>{item.raca}</Text>
                   </View>
                 </View>
               )}
@@ -130,4 +149,4 @@ export const Home = () => {
       </ImageBackground>
     </View>
   );
-};
+}

@@ -3,12 +3,6 @@ import { PerfilUsuario } from "../screens/Perfil";
 import { Home } from "../screens/Home";
 import { Mensagens } from "../screens/Mensagens";
 import { CadastroPet } from "../screens/CadastroPet";
-import { Image } from "react-native";
-import { styles } from "./style";
-import House from "../assets/Home.png";
-import Chat from "../assets/Chat.png";
-import Add from "../assets/Add.png";
-import Profile from "../assets/Profile.png";
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
@@ -28,14 +22,10 @@ export function TabRoutes() {
       }}
     >
       <Tab.Screen
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Image style={styles.navigatorIcons} source={House}></Image>
-          ),
-        }}
+        
         name="TabHome"
         component={Home}
-        options={{
+      options={{
           tabBarIcon: () => (
               <Entypo name="home" size={32} color='#fff' />
           )

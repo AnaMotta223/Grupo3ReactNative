@@ -15,6 +15,8 @@ export const styles = StyleSheet.create({
     
   },
 
+
+
   headerTitle: {
     marginTop:20,
     fontSize:25,
@@ -53,6 +55,7 @@ export const styles = StyleSheet.create({
   },
 
   footerBottom: {
+  
     alignSelf: "center",
     marginTop: 30,
   },

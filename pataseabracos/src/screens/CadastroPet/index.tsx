@@ -1,4 +1,4 @@
-import {Image,ImageBackground,Text,TextInput,TouchableOpacity, View,} from "react-native";
+import {Image,ImageBackground,ScrollView,Text,TextInput,TouchableOpacity, View,} from "react-native";
 import React, { useState } from "react";
 import Fundo from "../../assets/fundoClaro2.jpg";
 import Seta from "../../assets/seta.png";
@@ -20,6 +20,7 @@ export const CadastroPet = () => {
   const [tipoSelecionado, setTipoSelecionado] = useState<string | null>(null);
   const [sexoSelecionado, setSexoSelecionado] = useState<string | null>(null);
   const [nome, setNome] = useState("");
+  const [user, setUser] = useState("")
   const [raca, setRaca] = useState("");
   const [idade, setIdade] = useState("");
   const [peso, setPeso] = useState("");
@@ -35,6 +36,7 @@ export const CadastroPet = () => {
         tipo: tipoSelecionado ? tipoSelecionado.toUpperCase() : null, 
         sexo: sexoConvertido,
         nome,
+        user,
         raca,
         idade,
         peso,
@@ -63,6 +65,9 @@ export const CadastroPet = () => {
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Cadastro de Animal</Text>
         </View>
+
+        <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
+        
         <View style={styles.content}>
           <View style={styles.dropDownCard}>
             <SelectDropdown
@@ -96,6 +101,13 @@ export const CadastroPet = () => {
             placeholder="Nome:"
             value={nome}
             onChangeText={setNome}
+          />
+
+          <TextInput
+            style={styles.contentInput}
+            placeholder="Usuário:"
+            value={user}
+            onChangeText={setUser}
           />
 
           <TextInput
@@ -165,7 +177,10 @@ export const CadastroPet = () => {
             <Text style={styles.footerText}>Cadastrar</Text>
           </View>
         </TouchableOpacity>
+        </ScrollView>
+        
       </View>
+      
     </ImageBackground>
   );
 };
