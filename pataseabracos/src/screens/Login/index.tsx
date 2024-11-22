@@ -17,16 +17,18 @@ import BotaoCriarConta from "../../components/LoginBotao2";
 import TextInputLogin from "../../components/LoginInput";
 import { styles } from "./style";
 import { Loading } from "../../components/Loading";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Login = () => {
   const navigation = useNavigation();
 
-  const [username, setUsername] = useState<string>("");
+  //const [username, setUsername] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  //const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { username, setUsername, checkAuthentication, isLoading } = useAuth();
 
   const login = async () => {
-    setIsLoading(true);
+    //setIsLoading(true);
 
     if (username === "" || senha === "") {
       Alert.alert("Erro", "Preencha os campos!");
@@ -41,14 +43,14 @@ export const Login = () => {
           if (!usuarioValido) {
             Alert.alert("Erro", "Usuário ou senha inválidos!");
           } else {
-            navigation.navigate("stackHome");
+            checkAuthentication(username);
           }
         })
 
         .catch((error) => {
           console.log("Erro ao consumir a api", error);
         });
-        setIsLoading(false);
+        //setIsLoading(false);
     }
   };
 

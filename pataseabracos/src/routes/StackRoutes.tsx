@@ -3,6 +3,7 @@ import React from "react";
 import { Cadastrar } from "../screens/Cadastrar";
 import { Login } from "../screens/Login";
 import { TabRoutes } from "./tab.routes";
+import { AnimaisCadastrados } from "../screens/AnimaisCadastrados";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,11 @@ export default function StackRoutes() {
         name="stackHome"
         component={TabRoutes}
         options={{ headerShown: false, gestureEnabled: false }}
+      />
+       <Stack.Screen
+        name="stackAnimaisCadastrados"
+        component={AnimaisCadastrados}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
