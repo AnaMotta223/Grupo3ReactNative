@@ -117,6 +117,7 @@ export const styles = StyleSheet.create({
 
   footerText: {
     paddingLeft: 100,
+    color: "#8B0000"
   },
 
   scroll:{
