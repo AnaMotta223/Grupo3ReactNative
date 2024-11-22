@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Image,
@@ -17,6 +17,11 @@ import BotaoCriarConta from "../../components/LoginBotao2";
 import TextInputLogin from "../../components/LoginInput";
 import { styles } from "./style";
 
+interface PropsApi {
+  email: string;
+  username: string;
+}
+
 export const Cadastrar = () => {
   const navigation = useNavigation();
 
@@ -25,14 +30,27 @@ export const Cadastrar = () => {
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
   const [confirmaSenha, setConfirmaSenha] = useState<string>("");
-  const [emailValido, setEmailValido] = useState<boolean>(false);
-  const [userValido, setUserValido] = useState<boolean>(false);
+  const [users, setUsers] = useState<PropsApi[]>([]);
 
   const login = () => {
     navigation.navigate("stackLogin");
   };
 
-  const verificar = () => {
+  const loadUsers = async () => {
+    try {
+      const response = await axios.get(
+        "https://6722c0392108960b9cc576f5.mockapi.io/usuarios"
+      );
+
+      if (response.status === 200) {
+        setUsers(response.data);
+      }
+    } catch (error) {
+      console.log("Erro na função loadUsers", error);
+    }
+  };
+
+  const verificar = async () => {
     if (
       nome === "" ||
       username === "" ||
@@ -46,84 +64,52 @@ export const Cadastrar = () => {
     }
 
     try {
-      axios
-        .get("https://6722c0392108960b9cc576f5.mockapi.io/usuarios")
-        .then((response) => {
-          const usuarioValido = response.data.find(
-            (user: any) => user.username === username 
-          );
+      const usuarioValido = users.some(
+        (user) => user.email === email || user.username === username
+      );
 
-          if (usuarioValido) {
-            setUserValido(false);
-            Alert.alert("Erro", "Username já em uso");
-          } else {
-            setUserValido(true);
-          }
-        });
-    } catch (error) {
-      console.log("Erro ao consumir a api", error);
-    }
-
-    try {
-      axios
-        .get("https://6722c0392108960b9cc576f5.mockapi.io/usuarios")
-        .then((response) => {
-          const usuarioValido = response.data.find(
-            (user: any) => user.email === email
-          );
-
-          if (usuarioValido) {
-            setEmailValido(false);
-            Alert.alert("Erro", "Email já em uso");
-          } else {
-            setEmailValido(true);
-          }
-        });
-    } catch (error) {
-      console.log("Erro ao consumir a api", error);
-    }
-  };
-
-  const cadastrar = async () => {
-    verificar();
-    if (emailValido && userValido) {
-      setEmailValido(false);
-      setUserValido(false);
-      try {
-        const response = await axios.post(
-          "https://6722c0392108960b9cc576f5.mockapi.io/usuarios",
-          {
-            nome: nome,
-            username: username,
-            email: email,
-            senha: senha,
-          }
-        );
-        navigation.navigate("stackHome");
-      } catch (error) {
-        console.log("Erro na requisição ", error);
+      if (usuarioValido) {
+        Alert.alert("Erro", "Email ou username já em uso");
+      } else {
+        cadastro();
       }
+    } catch (error) {
+      console.log("Erro ao consumir a api", error);
     }
   };
 
-  const handleNome = (value: string) => {
-    setNome(value);
+  const cadastro = async () => {
+    try {
+      const response = await axios.post(
+        "https://6722c0392108960b9cc576f5.mockapi.io/usuarios",
+        {
+          nome: nome,
+          username: username,
+          email: email,
+          senha: senha,
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        navigation.navigate("stackHome");
+        Alert.alert("Cadastro realizado com sucesso!");
+      } else {
+        console.log("Erro ao cadastrar", response);
+      }
+    } catch (error) {
+      console.log("Erro na requisição ", error);
+    }
   };
-  const handleUsername = (value: string) => {
-    setUsername(value);
-  };
-  const handleEmail = (value: string) => {
-    setEmail(value);
-  };
-  const handleSenha = (value: string) => {
-    setSenha(value);
-  };
-  const handleConfirmaSenha = (value: string) => {
-    setConfirmaSenha(value);
-  };
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback
+      onPress={Keyboard.dismiss}
+      style={styles.container}
+    >
       <View style={styles.container}>
         <ImageBackground
           style={styles.imagemFundo}
@@ -143,35 +129,35 @@ export const Cadastrar = () => {
               placeholder="Nome Completo"
               typeIcon="person"
               valueInput={nome}
-              handleFunctionInput={handleNome}
+              handleFunctionInput={(value) => setNome(value)}
             />
             <TextInputLogin
               placeholder="Nome de usuário"
               typeIcon="username"
               valueInput={username}
-              handleFunctionInput={handleUsername}
+              handleFunctionInput={(value) => setUsername(value)}
             />
             <TextInputLogin
               placeholder="Email"
               typeIcon="email"
               valueInput={email}
-              handleFunctionInput={handleEmail}
+              handleFunctionInput={(value) => setEmail(value)}
             />
             <TextInputLogin
               placeholder="Senha"
               typeIcon="password"
               hideInput={true}
               valueInput={senha}
-              handleFunctionInput={handleSenha}
+              handleFunctionInput={(value) => setSenha(value)}
             />
             <TextInputLogin
               placeholder="Confirmar Senha"
               typeIcon="password"
               hideInput={true}
               valueInput={confirmaSenha}
-              handleFunctionInput={handleConfirmaSenha}
+              handleFunctionInput={(value) => setConfirmaSenha(value)}
             />
-            <BotaoLogin titulo="Cadastrar" handleFunction={cadastrar} />
+            <BotaoLogin titulo="Cadastrar" handleFunction={verificar} />
             <BotaoCriarConta titulo="Voltar" handleFunction={login} />
           </View>
         </ImageBackground>
