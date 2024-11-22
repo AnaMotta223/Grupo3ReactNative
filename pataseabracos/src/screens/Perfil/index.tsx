@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Image,
@@ -15,9 +15,15 @@ import Perfil from "../../assets/fotoPerfil.png";
 import Cima from "../../assets/setaCima.png";
 import Baixo from "../../assets/setaBaixo.png";
 import * as ImagePicker from "expo-image-picker";
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+
 
 export const PerfilUsuario = () => {
-  
+
+  //Parte das navegações
+const navigation = useNavigation();
+
   // Parte dos cards
   const [isAdocoesOpen, setIsAdocoesOpen] = useState(false);
   const [isAnimaisOpen, setIsAnimaisOpen] = useState(false);
@@ -108,7 +114,7 @@ export const PerfilUsuario = () => {
               source={profilePicture ? { uri: profilePicture } : Perfil}
               style={styles.profilePicture}
             />
-            <Text style={styles.name}>Noé da Silva</Text>
+            <Text style={styles.name}>Seu perfil</Text>
           </View>
 
           <View style={styles.content}>
@@ -198,7 +204,9 @@ export const PerfilUsuario = () => {
             </View>
           </View>
 
-          <TouchableOpacity style={styles.footerBotton}>
+          <TouchableOpacity 
+          onPress={() => navigation.navigate("stackLogin")}
+          style={styles.footerBotton}>
             <View style={styles.footer}>
               <Text style={styles.footerText}>Sair</Text>
             </View>

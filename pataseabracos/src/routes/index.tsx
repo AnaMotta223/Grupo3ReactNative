@@ -7,7 +7,7 @@ export default function Routes() {
   return (
     <NavigationContainer>
       <StackRoutes />
-      <TabRoutes/>
+      {/* <TabRoutes/> */}
     </NavigationContainer>
   );
 }
