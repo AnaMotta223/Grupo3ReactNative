@@ -17,10 +17,6 @@ import homemUm from '../../assets/homem1.jpg';
 import homemDois from '../../assets/homem2.jpg';
 import mulherUm from '../../assets/mulher1.jpg';
 import mulherDois from '../../assets/mulher2.jpg';
-import homeIcon from '../../assets/home.png';
-import chatIcon from '../../assets/mensagem.png';
-import userIcon from '../../assets/usuario.png';
-import pranchetaIcon from '../../assets/prancheta.png';
 import { styles } from './style';
 
 

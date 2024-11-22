@@ -18,6 +18,7 @@ import Baixo from "../../assets/setaBaixo.png";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import { useAuth } from "../../hooks/useAuth";
 
 
 export const PerfilUsuario = () => {
@@ -30,6 +31,7 @@ const navigation = useNavigation();
   const [isAdocoesOpen, setIsAdocoesOpen] = useState(false);
   const [isAnimaisOpen, setIsAnimaisOpen] = useState(false);
   const [isConfiguracoesOpen, setIsConfiguracoesOpen] = useState(false);
+  const { username, handleLogOut } = useAuth();
 
   const toggleAdocoes = () => {
     setIsAdocoesOpen(!isAdocoesOpen);
@@ -101,6 +103,10 @@ const navigation = useNavigation();
     }
   };
 
+  const handleCadastroAnimais = () => {
+    navigation.navigate("stackAnimaisCadastrados");
+  }
+
   return (
     <ImageBackground source={Fundo} style={styles.background} blurRadius={6}>
       <View style={styles.container}>
@@ -117,48 +123,25 @@ const navigation = useNavigation();
               source={profilePicture ? { uri: profilePicture } : Perfil}
               style={styles.profilePicture}
             />
-            <Text style={styles.name}>Seu perfil</Text>
+            <Text style={styles.name}>{username}</Text>
           </View>
 
           <View style={styles.content}>
-            <View
-              style={[styles.contentCard, { height: isAdocoesOpen ? 150 : 50 }]}
+          <TouchableOpacity
+            onPress={handleCadastroAnimais}
             >
-              <View style={styles.cardContent}>
-                <Text style={styles.cardTitle}>Suas Adoções</Text>
-                <TouchableOpacity
-                  style={styles.contentCardButton}
-                  onPress={toggleAdocoes}
-                >
-                  <Image source={isAdocoesOpen ? Cima : Baixo} />
-                </TouchableOpacity>
-              </View>
-              {isAdocoesOpen && (
-                <View style={styles.extraInfo}>
-                  <Text>As parada do bauglho das adoção</Text>
-                </View>
-              )}
+            <View style={styles.contentCard}>
+              <Text style={styles.cardTitle}>Seus animais para adoção</Text>
             </View>
+            </TouchableOpacity>
 
-            <View
-              style={[styles.contentCard, { height: isAnimaisOpen ? 150 : 50 }]}
+            <TouchableOpacity
+            //onPress={stackAlgumaCoisa}
             >
-              <View style={styles.cardContent}>
-                <Text style={styles.cardTitle}>Seus animais para adoção</Text>
-                <TouchableOpacity
-                  style={styles.contentCardButton}
-                  onPress={toggleAnimais}
-                >
-                  <Image source={isAnimaisOpen ? Cima : Baixo} />
-                </TouchableOpacity>
-              </View>
-              {isAnimaisOpen && (
-                <View style={styles.extraInfo}>
-                  <Text>As parada do bauglho das adoção</Text>
-                </View>
-              )}
+            <View style={styles.contentCard}>
+              <Text style={styles.cardTitle}>Suas Adoções</Text>
             </View>
-
+            </TouchableOpacity>
             <View
               style={[
                 styles.contentCard,
@@ -208,7 +191,7 @@ const navigation = useNavigation();
           </View>
 
           <TouchableOpacity 
-          onPress={() => navigation.navigate("stackLogin")}
+          onPress={handleLogOut}
           style={styles.footerBotton}>
             <View style={styles.footer}>
               <Text style={styles.footerText}>Sair</Text>
