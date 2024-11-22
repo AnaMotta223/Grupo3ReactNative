@@ -25,6 +25,8 @@ export default function StackRoutes() {
         component={TabRoutes}
         options={{ headerShown: false }}
       />
+      
+      
     </Stack.Navigator>
   );
 }
