@@ -74,6 +74,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 10,
     width: "100%",
     marginBottom: 90,
+
     fontSize: 3,
     alignItems: "center",
     
@@ -90,6 +91,7 @@ export const styles = StyleSheet.create({
 
   bottonConfigText:{
     textAlign: "center"
+
   },
 
   cardTitle: {
@@ -99,8 +101,10 @@ export const styles = StyleSheet.create({
   },
 
 
+
   contentCardButton: {
   },
+
 
   footer: {
     backgroundColor: "#708D73",
@@ -122,7 +126,9 @@ export const styles = StyleSheet.create({
 
   footerBotton:{
     alignSelf: "center",
+
   },
 
  
+
 });

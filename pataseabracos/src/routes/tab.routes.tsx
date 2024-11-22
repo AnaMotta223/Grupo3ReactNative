@@ -9,6 +9,9 @@ import House from "../assets/Home.png";
 import Chat from "../assets/Chat.png";
 import Add from "../assets/Add.png";
 import Profile from "../assets/Profile.png";
+import Entypo from '@expo/vector-icons/Entypo';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,6 +22,7 @@ export function TabRoutes() {
         headerShown: false,
         tabBarStyle: {
           backgroundColor: "#B68458",
+          borderColor: "transparent"
         },
         tabBarShowLabel: false,
       }}
@@ -31,36 +35,44 @@ export function TabRoutes() {
         }}
         name="TabHome"
         component={Home}
+        options={{
+          tabBarIcon: () => (
+              <Entypo name="home" size={32} color='#fff' />
+          )
+        }}
       />
 
       <Tab.Screen
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Image style={styles.navigatorIcons} source={Add}></Image>
-          ),
-        }}
         name="Cadastrar"
         component={CadastroPet}
+        options={{
+          tabBarIcon: () => (
+              <MaterialIcons name="assignment-add" size={32} color='#fff' />
+          ),
+          tabBarStyle: {
+            display: "none",
+          }
+        }}
       />
 
       <Tab.Screen
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Image style={styles.navigatorIcons} source={Chat}></Image>
-          ),
-        }}
-        name="Mansagem"
+        name="Mensagens"
         component={Mensagens}
+        options={{
+          tabBarIcon: () => (
+              <Entypo name="chat" size={32} color='#fff' />
+          )
+        }}
       />
 
       <Tab.Screen
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Image style={styles.navigatorIcons} source={Profile}></Image>
-          ),
-        }}
         name="Perfil"
         component={PerfilUsuario}
+        options={{
+          tabBarIcon: () => (
+              <FontAwesome6 name="circle-user" size={32} color='#fff' />
+          )
+        }}
       />
     </Tab.Navigator>
   );
