@@ -1,13 +1,15 @@
-import { FlatList, Image, ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { styles } from './style'
 import fundoEscuro from '../../assets/fundoEscuro.jpg'
 import logo from '../../assets/logo.png'
 import cachorro from '../../assets/cachorroCard.png'
 import gato from '../../assets/gatoCard.png'
+import passaro from '../../assets/passaroCard.png'
+import hamster from '../../assets/hamsterCard.png'
+import peixe from '../../assets/peixeCard.png'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { ServiceGetAnimais } from '../../service/ServiceGetAnimais'
-import { Loading } from '../../components/Loading'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useFonts, ZillaSlab_400Regular, ZillaSlab_700Bold  } from '@expo-google-fonts/zilla-slab'
 
@@ -24,21 +26,23 @@ export const Home = () => {
   
   const [animais, setAnimais] = useState<ResponseApi[]>([]);
   const [isLoading, setIsloading] = useState<boolean>(false);
+  const [busca, setBusca] = useState<string>("");
   const [fontLoaded] = useFonts({
     ZillaSlab_400Regular, ZillaSlab_700Bold, 
   });
 
+  const handleInputChange = (value: string) => {
+    setBusca(value);
+  };
+
   const loadApi = async () => {
     setIsloading(true);
-    
     const response = await ServiceGetAnimais();
-    
     if (response && response.status === 200) {
       setAnimais(response.data)
     } else {
       console.log("Erro na requisição")
     }
-
     setIsloading(false);
   }
 
@@ -46,11 +50,12 @@ export const Home = () => {
     loadApi();
   }, [])
 
+  const animaisFiltrados = animais.filter((animal) =>
+    animal.raca.toLowerCase().includes(busca.toLowerCase()) ||
+    animal.tipo.toLowerCase().includes(busca.toLowerCase())
+  );
 
     return (
-
-
-
       <View style={styles.container}>
         
         <ImageBackground 
@@ -72,19 +77,17 @@ export const Home = () => {
           <Text style={styles.titulo}> Animais para adoção</Text>
           <View style={styles.boxPesquisar}>
           <Ionicons style={{transform: [{ translateX: 35}], zIndex: 999, marginTop: 8}} name="search" size={28} color="#B68458" />
-          <TextInput style={[styles.pesquisarInput]}  placeholder='Pesquisar' placeholderTextColor={"#B68458"}/>
+          <TextInput style={[styles.pesquisarInput]} value={busca} onChangeText={handleInputChange} placeholder='Pesquisar' placeholderTextColor={"#B68458"}/>
           </View>
         </View>
 
-        
-
           <View style={styles.cards}>
             {isLoading ? (
-            <Loading/> //criar um componente de loading p/ home
+           <ActivityIndicator/>
             ) : (
               <FlatList
                 showsVerticalScrollIndicator={false}
-                data={animais}
+                data={animaisFiltrados}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) =>
                   <View style={[styles.boxCard, styles.elevation]}>
@@ -97,6 +100,21 @@ export const Home = () => {
                     <Image style={styles.pet}
                     source={gato}
                     alt="Desenho de um gato" />
+                    } 
+                    {item.tipo.toUpperCase() === "HAMSTER" &&
+                    <Image style={styles.pet}
+                    source={hamster}
+                    alt="Desenho de um hamster" />
+                    } 
+                    {item.tipo.toUpperCase() === "PEIXE" &&
+                    <Image style={styles.pet}
+                    source={peixe}
+                    alt="Desenho de um peixe" />
+                    } 
+                    {item.tipo.toUpperCase() === "PASSARO" &&
+                    <Image style={styles.pet}
+                    source={passaro}
+                    alt="Desenho de um pássaro" />
                     } 
                     <View style={styles.boxInfo}>
                       <Text style={styles.name}>{`${item.nome},`}</Text>
