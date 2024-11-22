@@ -5,7 +5,7 @@ export type PropsStack = {
   }
   
   export type PropsTabs = {
-    TabsHome: undefined,
+    TabHome: undefined,
     TabsProfile: undefined,
     TabsSettings: undefined,
   }

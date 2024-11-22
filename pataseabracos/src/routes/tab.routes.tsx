@@ -5,10 +5,10 @@ import { Mensagens } from "../screens/Mensagens";
 import { CadastroPet } from "../screens/CadastroPet";
 import { Image } from "react-native";
 import { styles } from "./style";
-import House from "../assets/Home.png"
-import Chat from "../assets/Chat.png"
-import Add from "../assets/Add.png"
-import Profile from "../assets/Profile.png"
+import House from "../assets/home.png";
+import Chat from "../assets/Chat.png";
+import Add from "../assets/Add.png";
+import Profile from "../assets/Profile.png";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,29 +25,22 @@ export function TabRoutes() {
     >
       <Tab.Screen
         options={{
-
-          tabBarIcon: ({  }) => (
-
-
+          tabBarIcon: ({}) => (
             <Image style={styles.navigatorIcons} source={House}></Image>
           ),
         }}
-        name="Home"
+        name="TabHome"
         component={Home}
       />
 
       <Tab.Screen
         options={{
-
-          tabBarIcon: ({  }) => (
+          tabBarIcon: ({}) => (
             <Image style={styles.navigatorIcons} source={Add}></Image>
           ),
-          tabBarStyle:{
-            display:'none'
-          }
-
-
-
+          tabBarStyle: {
+            display: "none",
+          },
         }}
         name="Cadastrar"
         component={CadastroPet}
@@ -55,10 +48,7 @@ export function TabRoutes() {
 
       <Tab.Screen
         options={{
-
-          tabBarIcon: ({  }) => (
-
-
+          tabBarIcon: ({}) => (
             <Image style={styles.navigatorIcons} source={Chat}></Image>
           ),
         }}
@@ -68,10 +58,7 @@ export function TabRoutes() {
 
       <Tab.Screen
         options={{
-
-          tabBarIcon: ({  }) => (
-
-
+          tabBarIcon: ({}) => (
             <Image style={styles.navigatorIcons} source={Profile}></Image>
           ),
         }}

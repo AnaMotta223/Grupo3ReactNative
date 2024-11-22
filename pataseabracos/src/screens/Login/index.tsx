@@ -16,14 +16,18 @@ import BotaoLogin from "../../components/LoginBotao";
 import BotaoCriarConta from "../../components/LoginBotao2";
 import TextInputLogin from "../../components/LoginInput";
 import { styles } from "./style";
+import { Loading } from "../../components/Loading";
 
 export const Login = () => {
   const navigation = useNavigation();
 
   const [username, setUsername] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const login = async () => {
+    setIsLoading(true);
+
     if (username === "" || senha === "") {
       Alert.alert("Erro", "Preencha os campos!");
     } else {
@@ -44,6 +48,7 @@ export const Login = () => {
         .catch((error) => {
           console.log("Erro ao consumir a api", error);
         });
+        setIsLoading(false);
     }
   };
 
@@ -60,37 +65,44 @@ export const Login = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <ImageBackground
-          style={styles.imagemFundo}
-          resizeMode="cover"
-          source={imagemFundo}
-        >
-          <View style={styles.box}>
-            <Image
-              style={styles.logo}
-              source={logo}
-              alt="Logo Patas e Abraços"
-            />
-            <Text style={styles.titulo}>Patas e Abraços</Text>
-            <TextInputLogin
-              placeholder="Nome de Usuário"
-              typeIcon="username"
-              valueInput={username}
-              handleFunctionInput={handleUsername}
-            />
-            <TextInputLogin
-              placeholder="Senha"
-              typeIcon="password"
-              hideInput={true}
-              valueInput={senha}
-              handleFunctionInput={handleSenha}
-            />
-            <BotaoLogin titulo="Entrar" handleFunction={login} />
-            <BotaoCriarConta titulo="Criar Conta" handleFunction={cadastrar} />
-          </View>
-        </ImageBackground>
-      </View>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <View style={styles.container}>
+          <ImageBackground
+            style={styles.imagemFundo}
+            resizeMode="cover"
+            source={imagemFundo}
+          >
+            <View style={styles.box}>
+              <Image
+                style={styles.logo}
+                source={logo}
+                alt="Logo Patas e Abraços"
+              />
+              <Text style={styles.titulo}>Patas e Abraços</Text>
+              <TextInputLogin
+                placeholder="Nome de Usuário"
+                typeIcon="username"
+                valueInput={username}
+                handleFunctionInput={handleUsername}
+              />
+              <TextInputLogin
+                placeholder="Senha"
+                typeIcon="password"
+                hideInput={true}
+                valueInput={senha}
+                handleFunctionInput={handleSenha}
+              />
+              <BotaoLogin titulo="Entrar" handleFunction={login} />
+              <BotaoCriarConta
+                titulo="Criar Conta"
+                handleFunction={cadastrar}
+              />
+            </View>
+          </ImageBackground>
+        </View>
+      )}
     </TouchableWithoutFeedback>
   );
 };

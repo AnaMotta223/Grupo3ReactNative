@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#B68458",
   },
-
+  
   imagemFundo: {
     flex: 1,
     height: "100%",
@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
+  
   box: {
     backgroundColor: "#D2C2A4",
     width: "90%",
@@ -24,12 +24,12 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
+  
   logo: {
     width: 100,
     height: 100,
   },
-
+  
   titulo: {
     fontSize: 30,
     fontWeight: "bold",

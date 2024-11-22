@@ -39,4 +39,8 @@ export const styles = StyleSheet.create({
   a: {
     height: 15,
   },
+
+  tela: {
+    flex: 1
+  }
 });
