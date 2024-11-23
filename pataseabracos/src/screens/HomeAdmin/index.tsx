@@ -72,6 +72,10 @@ export const HomeAdmin = () => {
     animal.tipo.toLowerCase().includes(busca.toLowerCase())
   );
 
+  const animaisNaoAdotados = animaisFiltrados.filter(
+    (animal) => !adocoes.some((adocao) => adocao.id === animal.id)
+  );
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>

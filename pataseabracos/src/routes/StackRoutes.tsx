@@ -37,11 +37,7 @@ export default function StackRoutes() {
         component={AnimaisAdotados}
         options={{ headerShown: false }}
       />
-       <Stack.Screen
-        name="stackHomeAdmin"
-        component={HomeAdmin}
-        options={{ headerShown: false, gestureEnabled: false }}
-      />
+
     </Stack.Navigator>
   );
 }

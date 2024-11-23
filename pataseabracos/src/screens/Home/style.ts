@@ -57,8 +57,7 @@ export const styles = StyleSheet.create({
   },
   pesquisarInput: {
     fontFamily: "ZillaSlab_400Regular",
-    fontWeight: 700,
-    fontSize: 19,
+    fontSize: 22,
     paddingHorizontal: 40,
     backgroundColor: "#F7EDD5",
     width: "80%",
