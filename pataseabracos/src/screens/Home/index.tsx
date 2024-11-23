@@ -5,6 +5,7 @@ import {
   Image,
   ImageBackground,
   Keyboard,
+  RefreshControl,
   Text,
   TextInput,
   TouchableOpacity,
@@ -30,6 +31,7 @@ import {
 } from "@expo-google-fonts/zilla-slab";
 import { PropsApi, useAuth } from "../../hooks/useAuth";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import axios from "axios";
 interface ResponseApi {
   id: number;
   nome: string;
@@ -42,6 +44,7 @@ const Tab = createBottomTabNavigator();
 export const Home = () => {
   const [animais, setAnimais] = useState<ResponseApi[]>([]);
   const [isLoading, setIsloading] = useState<boolean>(false);
+  const [refresh, setRefresh] = useState<boolean>(false);
   const [busca, setBusca] = useState<string>("");
   const { adocoes, setAdocoes } = useAuth();
   const [fontLoaded] = useFonts({
@@ -53,19 +56,20 @@ export const Home = () => {
     setBusca(value);
   };
 
-  const handleAdocoes = (value: PropsApi) => {
+  const handleAdocoes = async (value: PropsApi) => {
     const id = adocoes.findIndex(
       (item) => String(item.id) === String(value.id)
     );
-    //console.log(value.id);
+    console.log(id);
 
     if (id !== -1) {
       console.log("id igual");
-
       setAdocoes(adocoes.filter((item) => item.id !== value.id));
     } else {
       console.log("adicionado");
       setAdocoes([...adocoes, value]);
+      axios.delete(`https://6722c0692108960b9cc578da.mockapi.io/animais/${value.id}`);
+      console.log("Deletado");
     }
   };
 
@@ -83,6 +87,12 @@ export const Home = () => {
   useEffect(() => {
     loadApi();
   }, []);
+
+  const atualizarFeed = () => {
+    setRefresh(true);
+    loadApi();
+    setRefresh(false);
+  };
 
   const animaisFiltrados = animais.filter(
     (animal) =>
@@ -140,7 +150,14 @@ export const Home = () => {
               <ActivityIndicator size={80} color="#ffffff" />
             ) : (
               <FlatList
-                showsVerticalScrollIndicator={false}
+                style={{ width: "100%", height: "auto", paddingLeft: "20%" }}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refresh}
+                    onRefresh={atualizarFeed}
+                  />
+                }
+                showsVerticalScrollIndicator={true}
                 data={animaisNaoAdotados}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
