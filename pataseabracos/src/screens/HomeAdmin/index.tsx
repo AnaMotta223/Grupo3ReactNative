@@ -1,4 +1,4 @@
-import { ActivityIndicator, Button, FlatList, Image, ImageBackground, Keyboard, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
+import { ActivityIndicator, Alert, Button, FlatList, Image, ImageBackground, Keyboard, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { styles } from './style'
 import fundoEscuro from '../../assets/fundoEscuro.jpg'
@@ -14,6 +14,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useFonts, ZillaSlab_400Regular, ZillaSlab_700Bold  } from '@expo-google-fonts/zilla-slab'
 import { PropsApi, useAuth } from '../../hooks/useAuth'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
+import axios from 'axios'
 interface ResponseApi {
   id: number;
   nome: string;
@@ -63,6 +64,22 @@ export const HomeAdmin = () => {
     setIsloading(false);
   };
 
+  const deletarAnimal =  (id: number) => {
+    try {
+      setIsloading(true)
+      axios.delete(`https://6722c0692108960b9cc578da.mockapi.io/animais/${id}`);
+      Alert.alert("Animal deletado!")
+
+    }catch (erro) {
+      console.log("Erro ao deletar ", erro);
+      
+    } finally {
+      setIsloading(false);
+      loadApi();
+    }
+     
+  }
+
   useEffect(() => {
     loadApi();
   }, [])
@@ -70,10 +87,6 @@ export const HomeAdmin = () => {
   const animaisFiltrados = animais.filter((animal) =>
     animal.raca.toLowerCase().includes(busca.toLowerCase()) ||
     animal.tipo.toLowerCase().includes(busca.toLowerCase())
-  );
-
-  const animaisNaoAdotados = animaisFiltrados.filter(
-    (animal) => !adocoes.some((adocao) => adocao.id === animal.id)
   );
 
   return (
@@ -125,7 +138,7 @@ export const HomeAdmin = () => {
                 <View style={[styles.boxCard, styles.elevation]}>
                   {item.tipo.toUpperCase() === "CACHORRO" && (
                     <>
-                    <TouchableOpacity style={{zIndex: 999, position: "absolute"}}>
+                    <TouchableOpacity style={{zIndex: 999, position: "absolute"}} onPress={() => deletarAnimal(item.id)}>
                     <MaterialIcons  name="delete" size={40} color="red" />
                     </TouchableOpacity>
                     <Image 
@@ -137,7 +150,7 @@ export const HomeAdmin = () => {
                   )}
                   {item.tipo.toUpperCase() === "GATO" && (
                     <>
-                    <TouchableOpacity style={{zIndex: 999, position: "absolute"}}>
+                    <TouchableOpacity style={{zIndex: 999, position: "absolute"}} onPress={() => deletarAnimal(item.id)}>
                     <MaterialIcons  name="delete" size={40} color="red" />
                     </TouchableOpacity>
                     <Image 
@@ -149,7 +162,7 @@ export const HomeAdmin = () => {
                   )}
                   {item.tipo.toUpperCase() === "HAMSTER" && (
                      <>
-                     <TouchableOpacity style={{zIndex: 999, position: "absolute"}}>
+                     <TouchableOpacity style={{zIndex: 999, position: "absolute"}} onPress={() => deletarAnimal(item.id)}>
                      <MaterialIcons  name="delete" size={40} color="red" />
                      </TouchableOpacity>
                     <Image 
@@ -161,7 +174,7 @@ export const HomeAdmin = () => {
                   )}
                   {item.tipo.toUpperCase() === "PEIXE" && (
                      <>
-                     <TouchableOpacity style={{zIndex: 999, position: "absolute"}}>
+                     <TouchableOpacity style={{zIndex: 999, position: "absolute"}} onPress={() => deletarAnimal(item.id)}>
                      <MaterialIcons  name="delete" size={40} color="red" />
                      </TouchableOpacity>
                     <Image 
@@ -173,7 +186,7 @@ export const HomeAdmin = () => {
                   )}
                   {item.tipo.toUpperCase() === "PASSARO" && (
                      <>
-                     <TouchableOpacity style={{zIndex: 999, position: "absolute"}}>
+                     <TouchableOpacity style={{zIndex: 999, position: "absolute"}} onPress={() => deletarAnimal(item.id)}>
                      <MaterialIcons  name="delete" size={40} color="red" />
                      </TouchableOpacity>
                      <Image 

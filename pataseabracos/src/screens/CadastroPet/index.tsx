@@ -44,11 +44,7 @@ export const CadastroPet = () => {
         localidade,
       };
 
-      console.log("Enviando dados:", dadosPet);
-
       const response = await axios.post("https://6722c0692108960b9cc578da.mockapi.io/animais", dadosPet);
-      console.log("Resposta da API:", response.data);
-
       alert("Pet cadastrado com sucesso!");
     } catch (error) {
       console.error("Erro ao cadastrar o pet:", error);

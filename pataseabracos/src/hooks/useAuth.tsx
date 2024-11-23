@@ -92,6 +92,7 @@ export const AuthProvider = ({ children }: any) => {
     }
     setIsLoading(false);
   };
+  
 
   useEffect(() => {
     getData();
