@@ -38,7 +38,6 @@ export const styles = StyleSheet.create({
     color: '#fff',
     marginLeft: 60,
     marginTop: 20,
-    
     fontWeight: 'bold',
   },
 
@@ -49,7 +48,6 @@ export const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 30,
     borderRadius: 10,
-    
   },
 
   messageIcon: {
@@ -66,7 +64,6 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     color: '#666',
     textAlign: 'center',
-   
   },
 
   messageText: {
@@ -77,10 +74,6 @@ export const styles = StyleSheet.create({
     marginTop: 10, 
     marginBottom: 10,
     marginLeft: 45,
-    
-    
-    
-  
   },
 
   popupButton: {
@@ -133,9 +126,6 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     marginBottom: 20,
-    
-    
   },
 
- 
 });
