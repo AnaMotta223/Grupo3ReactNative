@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     height:69,
   },
-
+  
   headerimg: {
     marginTop:30,
     marginLeft:10
@@ -26,7 +26,11 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     marginLeft: 50,
   },
-    
+  headerimg: {
+     marginTop:30,
+     marginLeft:10
+  },
+
   contentInput: {
     backgroundColor: "#F7EDD5",
     width: 329.17,

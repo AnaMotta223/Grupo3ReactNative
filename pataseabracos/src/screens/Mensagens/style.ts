@@ -13,12 +13,12 @@ export const styles = StyleSheet.create({
 
   header: {
     backgroundColor: '#B68458',
-    paddingVertical: 35,
+    paddingVertical: 20,
     paddingHorizontal: 20,
-    gap: 5,
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
+    zIndex: 2, 
   },
 
   logoContainer: {
@@ -29,61 +29,56 @@ export const styles = StyleSheet.create({
   logo: {
     width: 50,
     height: 50,
-    marginTop: -20,
-    marginBottom: -40,
+    marginTop: 22,
   },
 
   cabecalho: {
     fontSize: 27,
-    color: '#fff',
-    marginLeft: 60,
-    marginTop: 20,
-    fontWeight: 'bold',
+    color: '#000',
+    marginLeft: 43,
+    fontFamily: "ZillaSlab_700Bold",
+    marginTop: 22,
   },
 
   messageCard: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    marginHorizontal: 10,
-    marginVertical: 30,
-    borderRadius: 10,
+    marginHorizontal: 15,
+    marginVertical: 20,
+    borderRadius: 12,
+    padding: 15,
+    elevation: 5, 
   },
 
   messageIcon: {
-    width: 90,
-    height: 90,
-    marginBottom:10,
-    marginRight: -40,
-    alignSelf: 'auto',
-    borderRadius:45,
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    marginRight: 15,
   },
 
   messageName: {
     fontWeight: 'bold',
-    fontSize: 20,
-    color: '#666',
-    textAlign: 'center',
+    fontSize: 18,
+    color: '#333',
+    textAlign: 'center', //
   },
 
   messageText: {
-    fontSize: 17,
+    fontSize: 15,
     color: '#666',
-    textAlign: 'center',        
-   // width: '80%',
-    marginTop: 10, 
+    marginTop: 5,
     marginBottom: 10,
     marginLeft: 45,
   },
 
   popupButton: {
-    backgroundColor: '#708D73',  
-    paddingVertical: 10,
+    backgroundColor: '#708D73',
+    paddingVertical: 8,
+    paddingHorizontal: 15,
     borderRadius: 50,
-    paddingLeft: 10,
-    width: '75%', 
-    marginBottom: 10,
-    marginLeft: 40,
+    marginTop: 10,
   },
 
   popupButtonText: {
@@ -92,24 +87,24 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',  
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',  
   },
 
   modalContent: {
-    backgroundColor: '#fff',
+    backgroundColor: '#F3E6CE',
     padding: 20,
-    borderRadius: 10,
-    width: '80%',
+    borderRadius: 12,
+    width: '85%', 
     alignItems: 'center',
+    justifyContent: 'center',
   },
 
   modalTitle: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 10,
@@ -119,13 +114,33 @@ export const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    marginBottom: 10,
+    marginBottom: 15,
   },
 
   modalMessage: {
-    fontSize: 18,
+    fontSize: 16,
     textAlign: 'center',
+    color: '#444',
     marginBottom: 20,
   },
+  
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+  },
 
+  button: {
+    backgroundColor: '#708D73',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
+  },
 });

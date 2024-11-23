@@ -4,6 +4,7 @@ import { Cadastrar } from "../screens/Cadastrar";
 import { Login } from "../screens/Login";
 import { TabRoutes } from "./tab.routes";
 import { AnimaisCadastrados } from "../screens/AnimaisCadastrados";
+import { Chat } from '../screens/Chat';
 import { AnimaisAdotados } from "../screens/AnimaisAdotados";
 import { HomeAdmin } from "../screens/HomeAdmin";
 
@@ -32,12 +33,16 @@ export default function StackRoutes() {
         component={AnimaisCadastrados}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="stackChat"  
+        component={Chat}  
+        options={{ headerShown: false }}
+      /> 
     <Stack.Screen
         name="stackAnimaisAdotados"
         component={AnimaisAdotados}
         options={{ headerShown: false }}
       />
-
     </Stack.Navigator>
   );
 }
