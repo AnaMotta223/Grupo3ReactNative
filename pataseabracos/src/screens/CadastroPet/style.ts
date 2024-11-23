@@ -15,8 +15,6 @@ export const styles = StyleSheet.create({
     
   },
 
-
-
   headerTitle: {
     marginTop:20,
     fontSize:25,
@@ -24,6 +22,7 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     marginLeft: 50,
   },
+
   headerimg: {
         marginTop:30,
         marginLeft:10

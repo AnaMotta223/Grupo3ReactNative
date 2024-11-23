@@ -3,6 +3,7 @@ export type PropsStack = {
     stackHome: undefined;
     stackCadastrar: undefined;
     stackAnimaisCadastrados: undefined;
+    stackChat: undefined;
   }
   
   export type PropsTabs = {
