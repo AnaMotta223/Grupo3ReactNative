@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
     height: 15,
   },
 
-  tela: {
+  tela: { //nao está em uso
     flex: 1
   }
 });
