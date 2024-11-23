@@ -7,13 +7,17 @@ import SelectDropdown from "react-native-select-dropdown";
 import SetaBaixo from "../../assets/setaBaixo.png";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import {CustomAlert} from "../../components/CustomAlert"; 
 
 const tipos = ["Cachorro", "Gato", "Passaro", "Peixe", "Coelho", "Hamster"];
-
 const sexos = ["Macho", "Fêmea"];
 
-
 export const CadastroPet = () => {
+
+  const [customAlertVisible, setCustomAlertVisible] = useState<boolean>(false);
+  const [alertData, setAlertData] = useState<{ title: string; message: string }>({
+  title: "",
+  message: "",});
 
   const navigation = useNavigation();
 
@@ -28,8 +32,17 @@ export const CadastroPet = () => {
   const [localidade, setLocalidade] = useState("");
 
   const handleCadastro = async () => {
-    try {
 
+    if (!tipoSelecionado || !sexoSelecionado || !nome || !user) {
+      setAlertData({
+        title: "Atenção",
+        message: "Preencha todos os campos obrigatórios!",
+      });
+      setCustomAlertVisible(true);
+      return;
+    }
+
+    try {
       const sexoConvertido = sexoSelecionado === "Macho" ? "M" : sexoSelecionado === "Fêmea" ? "F" : null;
 
       const dadosPet = {
@@ -49,10 +62,19 @@ export const CadastroPet = () => {
       const response = await axios.post("http://192.168.0.9:8080/animais", dadosPet);
       console.log("Resposta da API:", response.data);
 
-      alert("Pet cadastrado com sucesso!");
+      setAlertData({
+        title: "Sucesso",
+        message: "Pet cadastrado com sucesso!",
+      });
+      setCustomAlertVisible(true);
+
     } catch (error) {
       console.error("Erro ao cadastrar o pet:", error);
-      alert("Erro ao cadastrar o pet. Tente novamente.");
+      setAlertData({
+        title: "Erro",
+        message: "Erro ao cadastrar o pet. Tente novamente.",
+      });
+      setCustomAlertVisible(true);
     }
   };
 
@@ -85,9 +107,7 @@ export const CadastroPet = () => {
                 <View
                   style={{
                     ...styles.dropdownItemStyle,
-                    ...(isSelected && { backgroundColor: "#708D73" }),
-                  }}
-                >
+                    ...(isSelected && { backgroundColor: "#708D73" }),}}>  
                   <Text style={styles.dropdownItemTxtStyle}>{item}</Text>
                 </View>
               )}
@@ -133,9 +153,7 @@ export const CadastroPet = () => {
                 <View
                   style={{
                     ...styles.dropdownItemStyle,
-                    ...(isSelected && { backgroundColor: "#708D73" }),
-                  }}
-                >
+                    ...(isSelected && { backgroundColor: "#708D73" }),}}>
                   <Text style={styles.dropdownItemTxtStyle}>{item}</Text>
                 </View>
               )}
@@ -171,6 +189,7 @@ export const CadastroPet = () => {
             value={localidade}
             onChangeText={setLocalidade}
           />
+
         </View>
         <TouchableOpacity style={styles.footerBottom} onPress={handleCadastro}>
           <View style={styles.footer}>
@@ -178,9 +197,12 @@ export const CadastroPet = () => {
           </View>
         </TouchableOpacity>
         </ScrollView>
-        
+        <CustomAlert
+         visible={customAlertVisible}
+         title={alertData.title}
+         message={alertData.message}
+        onClose={() => setCustomAlertVisible(false)}/>
       </View>
-      
     </ImageBackground>
   );
 };

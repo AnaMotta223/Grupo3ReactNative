@@ -1,15 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useState } from "react";
-import {
-  Alert,
-  Image,
-  ImageBackground,
-  Keyboard,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import {Alert,Image,ImageBackground,Keyboard,Text, TouchableWithoutFeedback,View,} from "react-native";
 import imagemFundo from "../../assets/fundo25.png";
 import logo from "../../assets/logo.png";
 import BotaoLogin from "../../components/LoginBotao";
@@ -18,8 +10,20 @@ import TextInputLogin from "../../components/LoginInput";
 import { styles } from "./style";
 import { Loading } from "../../components/Loading";
 import { useAuth } from "../../hooks/useAuth";
+import {CustomAlert} from "../../components/CustomAlert"; 
 
 export const Login = () => {
+
+  const [customAlertVisible, setCustomAlertVisible] = useState<boolean>(false);
+  const [alertData, setAlertData] = useState<{ title: string; message: string }>({
+  title: "",
+  message: "",});
+
+  const showCustomAlert = (title: string, message: string) => {
+    setAlertData({ title, message });
+    setCustomAlertVisible(true);
+  };
+  
   const navigation = useNavigation();
 
   //const [username, setUsername] = useState<string>("");
@@ -31,7 +35,7 @@ export const Login = () => {
     //setIsLoading(true);
 
     if (username === "" || senha === "") {
-      Alert.alert("Erro", "Preencha os campos!");
+      showCustomAlert("Erro", "Preencha os campos!");
     } else {
       await axios
         .get("https://6722c0392108960b9cc576f5.mockapi.io/usuarios")
@@ -41,7 +45,7 @@ export const Login = () => {
           );
 
           if (!usuarioValido) {
-            Alert.alert("Erro", "Usuário ou senha inválidos!");
+            showCustomAlert("Erro", "Usuário ou senha inválidos!");
           } else {
             checkAuthentication(username);
           }
@@ -103,6 +107,11 @@ export const Login = () => {
               />
             </View>
           </ImageBackground>
+          <CustomAlert
+          visible={customAlertVisible}
+          title={alertData.title}
+          message={alertData.message}
+          onClose={() => setCustomAlertVisible(false)}/>
         </View>
       )}
     </TouchableWithoutFeedback>
