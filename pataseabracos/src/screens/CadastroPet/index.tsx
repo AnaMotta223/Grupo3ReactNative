@@ -34,7 +34,7 @@ export const CadastroPet = () => {
   const { cadastrados, setCadastrados } = useAuth();
 
   const handleCadastro = async (value: PropsCadastro) => {
-    try {
+    
 
     if (!tipoSelecionado || !sexoSelecionado || !nome || !user) {
       setAlertData({
