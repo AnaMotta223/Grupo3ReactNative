@@ -67,12 +67,11 @@ export const styles = StyleSheet.create({
   },
 
   boxCard: {
-    width: 250,
+    width: 350,
     backgroundColor: "#F3E6CE",
     paddingBottom: 20,
     borderRadius: 10,
     marginTop: 20,
-    gap: 2,
   },
 
   elevation: {
@@ -81,6 +80,7 @@ export const styles = StyleSheet.create({
   },
 
   boxInfo: {
+    paddingTop: 5,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",

@@ -7,6 +7,7 @@ import SelectDropdown from "react-native-select-dropdown";
 import SetaBaixo from "../../assets/setaBaixo.png";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { PropsCadastro, useAuth } from "../../hooks/useAuth";
 import {CustomAlert} from "../../components/CustomAlert"; 
 
 const tipos = ["Cachorro", "Gato", "Passaro", "Peixe", "Coelho", "Hamster"];
@@ -30,8 +31,10 @@ export const CadastroPet = () => {
   const [peso, setPeso] = useState("");
   const [observacao, setObservacoes] = useState("");
   const [localidade, setLocalidade] = useState("");
+  const { cadastrados, setCadastrados } = useAuth();
 
-  const handleCadastro = async () => {
+  const handleCadastro = async (value: PropsCadastro) => {
+    try {
 
     if (!tipoSelecionado || !sexoSelecionado || !nome || !user) {
       setAlertData({
@@ -57,11 +60,9 @@ export const CadastroPet = () => {
         localidade,
       };
 
-      console.log("Enviando dados:", dadosPet);
-
-      const response = await axios.post("http://192.168.0.9:8080/animais", dadosPet);
-      console.log("Resposta da API:", response.data);
-
+      setCadastrados([...cadastrados, value]);
+    
+      const response = await axios.post("https://6722c0692108960b9cc578da.mockapi.io/animais", dadosPet);
       setAlertData({
         title: "Sucesso",
         message: "Pet cadastrado com sucesso!",
@@ -191,7 +192,7 @@ export const CadastroPet = () => {
           />
 
         </View>
-        <TouchableOpacity style={styles.footerBottom} onPress={handleCadastro}>
+        <TouchableOpacity style={styles.footerBottom} onPress={() => handleCadastro({nome,raca})}>
           <View style={styles.footer}>
             <Text style={styles.footerText}>Cadastrar</Text>
           </View>

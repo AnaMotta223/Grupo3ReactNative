@@ -100,7 +100,7 @@ const showCustomAlert = (title: string, message: string) => {
       if (response.status === 200 || response.status === 201) {
         showCustomAlert("Sucesso", "Cadastro realizado com sucesso!");
         navigation.navigate("stackHome");
-        
+
       } else {
         console.log("Erro ao cadastrar", response);
       }

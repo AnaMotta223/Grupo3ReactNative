@@ -11,16 +11,6 @@ export const styles = StyleSheet.create({
     width: "100%"
   },
 
-  header: {
-    paddingTop: 30,
-    width: "100%",
-    alignItems: "center",
-    backgroundColor: "#B68458",
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-    flexDirection: "row",
-  },
-
   logoContainer: {
     alignItems: "flex-start",
     justifyContent: "flex-start",
@@ -30,6 +20,16 @@ export const styles = StyleSheet.create({
   logo: {
     width: 40,
     height: 40,
+  },
+
+  header: {
+    paddingTop: 30,
+    width: "100%",
+    alignItems: "center",
+    backgroundColor: "#B68458",
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    flexDirection: "row",
   },
 
   cabecalho: {
@@ -51,22 +51,24 @@ export const styles = StyleSheet.create({
     fontSize: 40,
     color: "#000",
   },
-
   boxPesquisar: {
     flexDirection: "row",
     alignSelf: "center"
   },
-
   pesquisarInput: {
     fontFamily: "ZillaSlab_400Regular",
-    fontSize: 22,
+    fontWeight: 700,
+    fontSize: 19,
     paddingHorizontal: 40,
     backgroundColor: "#F7EDD5",
     width: "80%",
     height: 47,
     borderRadius: 22,
   },
-  
+  tiposAnimais: {
+    fontSize: 22,
+    color: "#FFF",
+  },
   cards: {
     flex: 1,
     justifyContent: "center",
@@ -74,7 +76,6 @@ export const styles = StyleSheet.create({
     marginTop: 7,
     marginBottom: 15,
   },
-
   boxCard: {
     width: 250,
     backgroundColor: "#F3E6CE",
@@ -83,12 +84,10 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     gap: 2,
   },
-
   elevation: {
     elevation: 8,
     shadowColor: "#000",
   },
-
   boxInfo: {
     flexDirection: "row",
     gap: 8
@@ -111,12 +110,10 @@ export const styles = StyleSheet.create({
       textAlign: "center",
       color: "white",
   },
-
   name: {
     fontFamily: "ZillaSlab_700Bold",
     fontSize: 25,
   },
-
   pet: {
     alignSelf: "center",
     width: 250,
@@ -124,8 +121,4 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
   },
-
 });
-
-
-
