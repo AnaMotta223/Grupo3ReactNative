@@ -1,21 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  Alert,
-  Image,
-  ImageBackground,
-  Keyboard,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import {Alert,Image,ImageBackground,Keyboard,Text,TouchableWithoutFeedback,View,} from "react-native";
 import imagemFundo from "../../assets/fundo25.png";
 import logo from "../../assets/logo.png";
 import BotaoLogin from "../../components/LoginBotao";
 import BotaoCriarConta from "../../components/LoginBotao2";
 import TextInputLogin from "../../components/LoginInput";
 import { styles } from "./style";
+import { CustomAlert } from "../../components/CustomAlert";
+
 
 interface PropsApi {
   email: string;
@@ -23,6 +17,7 @@ interface PropsApi {
 }
 
 export const Cadastrar = () => {
+
   const navigation = useNavigation();
 
   const [nome, setNome] = useState<string>("");
@@ -31,6 +26,17 @@ export const Cadastrar = () => {
   const [senha, setSenha] = useState<string>("");
   const [confirmaSenha, setConfirmaSenha] = useState<string>("");
   const [users, setUsers] = useState<PropsApi[]>([]);
+
+  const [customAlertVisible, setCustomAlertVisible] = useState(false);
+  const [alertData, setAlertData] = useState<{ title: string; message: string }>({
+  title: "",
+  message: "",
+});
+
+const showCustomAlert = (title: string, message: string) => {
+  setAlertData({ title, message });
+  setCustomAlertVisible(true);
+};
 
   const login = () => {
     navigation.navigate("stackLogin");
@@ -58,9 +64,10 @@ export const Cadastrar = () => {
       senha === "" ||
       confirmaSenha === ""
     ) {
-      Alert.alert("Todos os campos devem ser preenchidos");
+      showCustomAlert("Erro", "Todos os campos devem ser preenchidos");
+      return;
     } else if (senha !== confirmaSenha) {
-      Alert.alert("Senha e confirma Senha não são iguais");
+      showCustomAlert("Erro", "Senha e confirmar senha não são iguais");
     }
 
     try {
@@ -69,7 +76,7 @@ export const Cadastrar = () => {
       );
 
       if (usuarioValido) {
-        Alert.alert("Erro", "Email ou username já em uso");
+        showCustomAlert("Erro", "Email ou username já estão em uso");
       } else {
         cadastro();
       }
@@ -91,8 +98,9 @@ export const Cadastrar = () => {
       );
 
       if (response.status === 200 || response.status === 201) {
-        navigation.navigate("stackLogin");
-        Alert.alert("Cadastro realizado com sucesso!");
+        showCustomAlert("Sucesso", "Cadastro realizado com sucesso!");
+        navigation.navigate("stackHome");
+
       } else {
         console.log("Erro ao cadastrar", response);
       }
@@ -161,6 +169,11 @@ export const Cadastrar = () => {
             <BotaoCriarConta titulo="Voltar" handleFunction={login} />
           </View>
         </ImageBackground>
+        <CustomAlert
+        visible={customAlertVisible}
+        title={alertData.title}
+        message={alertData.message}
+        onClose={() => setCustomAlertVisible(false)}/>
       </View>
     </TouchableWithoutFeedback>
   );
