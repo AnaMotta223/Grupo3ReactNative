@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import axios from 'axios';
 import { useContext, createContext, useState, useEffect } from 'react'
 
 export interface PropsApi {
@@ -44,6 +43,8 @@ export const AuthProvider = ({ children }: any) => {
     if (username != null) {
         setTimeout(() => {
           storeData(username);
+          console.log(username);
+          
           navigation.navigate("stackHome");
         }, 3000);
       }
@@ -51,7 +52,7 @@ export const AuthProvider = ({ children }: any) => {
 };
   
 const handleLogOut = () => {
-  AsyncStorage.removeItem('@User');
+  AsyncStorage.removeItem('@Usuario');
   navigation.navigate("stackLogin");
 }
 
@@ -59,7 +60,7 @@ const storeData = async (username: string, adocoes?: PropsApi[]) => {
   try {
     const jsonValueUser = JSON.stringify(username);
     const jsonValueAnimal = JSON.stringify(adocoes);
-    await AsyncStorage.setItem('@User', jsonValueUser);
+    await AsyncStorage.setItem('@Usuario', jsonValueUser);
     await AsyncStorage.setItem('@Animal', jsonValueAnimal);
 
     // const jsonValueUser = JSON.stringify({username, adocoes});
@@ -75,7 +76,7 @@ const storeData = async (username: string, adocoes?: PropsApi[]) => {
 const getData = async () => {
   setIsLoading(true);
   try {
-    const value = await AsyncStorage.getItem('@User');
+    const value = await AsyncStorage.getItem('@Usuario');
     if (value !== null) {
       const jsonValue = JSON.parse(value);
       setUsername(jsonValue);
@@ -86,7 +87,9 @@ const getData = async () => {
       const jsonValue = JSON.parse(valueAnimais);
       setAdocoes(jsonValue);
     }
+    
     navigation.navigate("stackHome");
+
   } catch (error) {
     console.log('Erro ao buscar dados!');
   }

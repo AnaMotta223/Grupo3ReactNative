@@ -107,6 +107,10 @@ const navigation = useNavigation();
     navigation.navigate("stackAnimaisCadastrados");
   }
 
+  const handleAdocaoAnimais = () => {
+    navigation.navigate("stackAnimaisAdotados");
+  }
+
   return (
     <ImageBackground source={Fundo} style={styles.background} blurRadius={6}>
       <View style={styles.container}>
@@ -136,7 +140,7 @@ const navigation = useNavigation();
             </TouchableOpacity>
 
             <TouchableOpacity
-            //onPress={stackAlgumaCoisa}
+            onPress={handleAdocaoAnimais}
             >
             <View style={styles.contentCard}>
               <Text style={styles.cardTitle}>Suas Adoções</Text>

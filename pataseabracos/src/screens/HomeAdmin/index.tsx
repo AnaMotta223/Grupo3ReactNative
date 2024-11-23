@@ -23,7 +23,7 @@ interface ResponseApi {
 
 const Tab = createBottomTabNavigator();
 
-export const Home = () => {
+export const HomeAdmin = () => {
   const [animais, setAnimais] = useState<ResponseApi[]>([]);
   const [isLoading, setIsloading] = useState<boolean>(false);
   const [busca, setBusca] = useState<string>("");
@@ -111,7 +111,7 @@ export const Home = () => {
   
         <View style={styles.cards}>
           {isLoading ? (
-            <ActivityIndicator size={80} color="#ffffff"/>
+             <ActivityIndicator size={80} color="#ffffff"/>
           ) : (
             <FlatList
               showsVerticalScrollIndicator={false}
@@ -120,41 +120,66 @@ export const Home = () => {
               renderItem={({ item }) => (
                 <View style={[styles.boxCard, styles.elevation]}>
                   {item.tipo.toUpperCase() === "CACHORRO" && (
+                    <>
+                    <TouchableOpacity style={{zIndex: 999, position: "absolute"}}>
+                    <MaterialIcons  name="delete" size={40} color="red" />
+                    </TouchableOpacity>
                     <Image 
                       style={styles.pet} 
                       source={cachorro} 
                       alt="Desenho de um cachorro" 
                     />
+                    </>
                   )}
                   {item.tipo.toUpperCase() === "GATO" && (
+                    <>
+                    <TouchableOpacity style={{zIndex: 999, position: "absolute"}}>
+                    <MaterialIcons  name="delete" size={40} color="red" />
+                    </TouchableOpacity>
                     <Image 
                       style={styles.pet} 
                       source={gato} 
                       alt="Desenho de um gato" 
                     />
+                    </>
                   )}
                   {item.tipo.toUpperCase() === "HAMSTER" && (
+                     <>
+                     <TouchableOpacity style={{zIndex: 999, position: "absolute"}}>
+                     <MaterialIcons  name="delete" size={40} color="red" />
+                     </TouchableOpacity>
                     <Image 
                       style={styles.pet} 
                       source={hamster} 
                       alt="Desenho de um hamster" 
                     />
+                    </>
                   )}
                   {item.tipo.toUpperCase() === "PEIXE" && (
+                     <>
+                     <TouchableOpacity style={{zIndex: 999, position: "absolute"}}>
+                     <MaterialIcons  name="delete" size={40} color="red" />
+                     </TouchableOpacity>
                     <Image 
                       style={styles.pet} 
                       source={peixe} 
                       alt="Desenho de um peixe" 
                     />
+                    </>
                   )}
                   {item.tipo.toUpperCase() === "PASSARO" && (
+                     <>
+                     <TouchableOpacity style={{zIndex: 999, position: "absolute"}}>
+                     <MaterialIcons  name="delete" size={40} color="red" />
+                     </TouchableOpacity>
                      <Image 
                        style={styles.pet} 
                        source={passaro} 
                        alt="Desenho de um pássaro" 
                      />
+                     </>
                   )}
-                  <View style={styles.boxDetalhes}>
+                   <View style={styles.boxDetalhes}>
                   <View style={styles.boxInfo}>
                     <Text style={styles.name}>{`${item.nome},`}</Text>
                     <Text style={styles.name}>{item.raca}</Text>

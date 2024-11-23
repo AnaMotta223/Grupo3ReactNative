@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, Image, ImageBackground, Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, ImageBackground, Keyboard, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { styles } from './style'
 import fundoEscuro from '../../assets/fundoEscuro.jpg'
@@ -8,7 +8,7 @@ import gato from '../../assets/gatoCard.png'
 import passaro from '../../assets/passaroCard.png'
 import hamster from '../../assets/hamsterCard.png'
 import peixe from '../../assets/peixeCard.png'
-import { ServiceGetAnimais } from '../../service/ServiceGetAnimais'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useFonts, ZillaSlab_400Regular, ZillaSlab_700Bold  } from '@expo-google-fonts/zilla-slab'
 import { useAuth } from '../../hooks/useAuth'
 
@@ -45,7 +45,7 @@ export const AnimaisAdotados = () => {
   
         <View style={styles.cards}>
           {isLoading ? (
-            <ActivityIndicator size={35} color="#ffffff"/>
+            <ActivityIndicator size={80} color="#ffffff"/>
           ) : (
             <FlatList
               showsVerticalScrollIndicator={false}
@@ -53,19 +53,26 @@ export const AnimaisAdotados = () => {
               keyExtractor={item => item.id.toString()}
               renderItem={({ item }) => (
                 <View style={[styles.boxCard, styles.elevation]}>
+                  
                   {item.tipo.toUpperCase() === "CACHORRO" && (
+                    <>
+                    <MaterialIcons name="delete" size={32} color="red" />
                     <Image 
                       style={styles.pet} 
                       source={cachorro} 
                       alt="Desenho de um cachorro" 
                     />
+                    </>
                   )}
                   {item.tipo.toUpperCase() === "GATO" && (
+                    <>
+                     <MaterialIcons name="delete" size={32} color="red" />
                     <Image 
                       style={styles.pet} 
                       source={gato} 
                       alt="Desenho de um gato" 
                     />
+                    </>
                   )}
                   {item.tipo.toUpperCase() === "HAMSTER" && (
                     <Image 
@@ -82,11 +89,17 @@ export const AnimaisAdotados = () => {
                     />
                   )}
                   {item.tipo.toUpperCase() === "PASSARO" && (
+                    <>
+                    <TouchableOpacity style={{zIndex: 999, position: "absolute"}}>
+                    <MaterialIcons  name="delete" size={40} color="red" />
+                    </TouchableOpacity>
                     <Image 
                       style={styles.pet} 
                       source={passaro} 
                       alt="Desenho de um pássaro" 
                     />
+                    </>
+                   
                   )}
                   <View style={styles.boxInfo}>
                     <Text style={styles.name}>{`${item.nome},`}</Text>

@@ -91,7 +91,7 @@ export const Cadastrar = () => {
       );
 
       if (response.status === 200 || response.status === 201) {
-        navigation.navigate("stackHome");
+        navigation.navigate("stackLogin");
         Alert.alert("Cadastro realizado com sucesso!");
       } else {
         console.log("Erro ao cadastrar", response);
