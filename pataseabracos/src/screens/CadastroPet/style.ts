@@ -4,9 +4,9 @@ export const styles = StyleSheet.create({
   background: {
     flex: 1,
   },
-
+  
   container: {
-  },
+  },                                    
 
   header: {
     backgroundColor: "#B68458",
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     marginTop:30,
     marginLeft:10
   },
-
+    
   headerTitle: {
     marginTop:20,
     fontSize:25,
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     marginLeft: 50,
   },
-
+    
   contentInput: {
     backgroundColor: "#F7EDD5",
     width: 329.17,
@@ -79,7 +79,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 8,
   },
-
+    
   dropdownItemIconStyle: {
     fontSize: 28,
     marginRight: 8,
@@ -93,12 +93,14 @@ export const styles = StyleSheet.create({
   footer: {
     backgroundColor: "#708D73",
     width: 175,
+
+
     height: 55,
     justifyContent: "center",
     marginBottom: 10,
     borderRadius: 20,
   },
-
+  
   footerBottom: {
     alignSelf: "center",
     marginTop: 30,
@@ -125,5 +127,4 @@ export const styles = StyleSheet.create({
   },
 
 });
-
 
