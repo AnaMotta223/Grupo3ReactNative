@@ -38,7 +38,6 @@ export const styles = StyleSheet.create({
     marginLeft: 43,
     fontFamily: "ZillaSlab_700Bold",
     marginTop: 22,
-    
   },
 
   messageCard: {
@@ -63,6 +62,7 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     color: '#333',
+    textAlign: 'center', //
   },
 
   messageText: {
@@ -70,6 +70,7 @@ export const styles = StyleSheet.create({
     color: '#666',
     marginTop: 5,
     marginBottom: 10,
+    marginLeft: 45,
   },
 
   popupButton: {
@@ -122,7 +123,7 @@ export const styles = StyleSheet.create({
     color: '#444',
     marginBottom: 20,
   },
-
+  
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
