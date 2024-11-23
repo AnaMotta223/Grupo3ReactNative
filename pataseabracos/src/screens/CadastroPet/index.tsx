@@ -7,6 +7,7 @@ import SelectDropdown from "react-native-select-dropdown";
 import SetaBaixo from "../../assets/setaBaixo.png";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { PropsCadastro, useAuth } from "../../hooks/useAuth";
 
 const tipos = ["Cachorro", "Gato", "Passaro", "Peixe", "Coelho", "Hamster"];
 
@@ -26,8 +27,9 @@ export const CadastroPet = () => {
   const [peso, setPeso] = useState("");
   const [observacao, setObservacoes] = useState("");
   const [localidade, setLocalidade] = useState("");
+  const { cadastrados, setCadastrados } = useAuth();
 
-  const handleCadastro = async () => {
+  const handleCadastro = async (value: PropsCadastro) => {
     try {
 
       const sexoConvertido = sexoSelecionado === "Macho" ? "M" : sexoSelecionado === "Fêmea" ? "F" : null;
@@ -43,6 +45,9 @@ export const CadastroPet = () => {
         observacao,
         localidade,
       };
+
+          setCadastrados([...cadastrados, value]);
+    
 
       const response = await axios.post("https://6722c0692108960b9cc578da.mockapi.io/animais", dadosPet);
       alert("Pet cadastrado com sucesso!");
@@ -168,7 +173,7 @@ export const CadastroPet = () => {
             onChangeText={setLocalidade}
           />
         </View>
-        <TouchableOpacity style={styles.footerBottom} onPress={handleCadastro}>
+        <TouchableOpacity style={styles.footerBottom} onPress={() => handleCadastro({nome,raca})}>
           <View style={styles.footer}>
             <Text style={styles.footerText}>Cadastrar</Text>
           </View>

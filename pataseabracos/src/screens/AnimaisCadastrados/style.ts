@@ -64,18 +64,18 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
   },
   boxCard: {
-    width: 250,
+    width: 350,
     backgroundColor: "#F3E6CE",
     paddingBottom: 20,
     borderRadius: 10,
     marginTop: 20,
-    gap: 2,
   },
   elevation: {
     elevation: 8,
     shadowColor: "#000",
   },
   boxInfo: {
+    paddingTop: 5,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",

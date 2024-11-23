@@ -1,11 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { useContext, createContext, useState, useEffect } from "react";
-
 export interface PropsApi {
   id: number;
   nome: string;
   tipo: string;
+  raca: string;
+}
+export interface PropsCadastro {
+  nome: string;
   raca: string;
 }
 
@@ -17,6 +20,8 @@ type PropsContext = {
   isLoading: boolean;
   adocoes: PropsApi[];
   setAdocoes: (value: PropsApi[]) => void;
+  cadastrados: PropsCadastro[];
+  setCadastrados: (value: PropsCadastro[]) => void;
 };
 
 const AuthContext = createContext<PropsContext>({
@@ -27,24 +32,25 @@ const AuthContext = createContext<PropsContext>({
   handleLogOut: () => {},
   isLoading: false,
   adocoes: [],
+  cadastrados: [],
+  setCadastrados: () => {}
 });
 
 export const AuthProvider = ({ children }: any) => {
+  
   const navigation = useNavigation();
 
   const [username, setUsername] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [adocoes, setAdocoes] = useState<PropsApi[]>([]);
+  const [cadastrados, setCadastrados] = useState<PropsCadastro[]>([]);
 
   const checkAuthentication = (username: string) => {
     setIsLoading(true);
-    console.log(isLoading);
-
 
      if (username != null) {
       setTimeout(() => {
         storeData(username);
-        console.log(username);
         navigation.navigate("stackHome");
         setIsLoading(false);
       }, 3000);
@@ -60,8 +66,11 @@ export const AuthProvider = ({ children }: any) => {
     try {
       const jsonValueUser = JSON.stringify(username);
       const jsonValueAnimal = JSON.stringify(adocoes);
+      const jsonValueAnimaisCadastrados = JSON.stringify(cadastrados);
+
       await AsyncStorage.setItem("@Usuario", jsonValueUser);
       await AsyncStorage.setItem("@Animal", jsonValueAnimal);
+      await AsyncStorage.setItem("@Cadastros", jsonValueAnimaisCadastrados);
 
       // const jsonValueUser = JSON.stringify({username, adocoes});
       // await AsyncStorage.setItem('@User', jsonValueUser);
@@ -70,7 +79,6 @@ export const AuthProvider = ({ children }: any) => {
     }
   };
 
-  //verificar se tem login pelo username
   const getData = async () => {
     setIsLoading(true);
     try {
@@ -84,6 +92,12 @@ export const AuthProvider = ({ children }: any) => {
       if (valueAnimais !== null) {
         const jsonValue = JSON.parse(valueAnimais);
         setAdocoes(jsonValue);
+      }
+
+      const valueAnimaisCadastrados = await AsyncStorage.getItem("@Cadastros");
+      if (valueAnimaisCadastrados !== null) {
+        const jsonValue = JSON.parse(valueAnimaisCadastrados);
+        setCadastrados(jsonValue);
       }
 
       navigation.navigate("stackHome");
@@ -108,6 +122,8 @@ export const AuthProvider = ({ children }: any) => {
         isLoading,
         adocoes,
         setAdocoes,
+        cadastrados,
+        setCadastrados
       }}
     >
       {children}

@@ -25,7 +25,7 @@ import { styles } from "./style";
 
 export const AnimaisAdotados = () => {
   const { adocoes = [] } = useAuth();
-  const [fontLoaded] = useFonts({
+  useFonts({
     ZillaSlab_400Regular,
     ZillaSlab_700Bold,
   });

@@ -40,7 +40,6 @@ export const HomeAdmin = () => {
 
   const handleAdocoes = (value: PropsApi) => {
     const id = adocoes.findIndex(item => String(item.id) === String(value.id))
-    //console.log(value.id);
     
     if(id !== -1){
       console.log("id igual");
