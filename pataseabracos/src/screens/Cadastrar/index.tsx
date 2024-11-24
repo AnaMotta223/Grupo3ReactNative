@@ -1,7 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {Alert,Image,ImageBackground,Keyboard,Text,TouchableWithoutFeedback,View,} from "react-native";
+import {
+  Alert,
+  Image,
+  ImageBackground,
+  Keyboard,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import imagemFundo from "../../assets/fundo25.png";
 import logo from "../../assets/logo.png";
 import BotaoLogin from "../../components/LoginBotao";
@@ -10,14 +18,12 @@ import TextInputLogin from "../../components/LoginInput";
 import { styles } from "./style";
 import { CustomAlert } from "../../components/CustomAlert";
 
-
 interface PropsApi {
   email: string;
   username: string;
 }
 
 export const Cadastrar = () => {
-
   const navigation = useNavigation();
 
   const [nome, setNome] = useState<string>("");
@@ -28,15 +34,18 @@ export const Cadastrar = () => {
   const [users, setUsers] = useState<PropsApi[]>([]);
 
   const [customAlertVisible, setCustomAlertVisible] = useState(false);
-  const [alertData, setAlertData] = useState<{ title: string; message: string }>({
-  title: "",
-  message: "",
-});
+  const [alertData, setAlertData] = useState<{
+    title: string;
+    message: string;
+  }>({
+    title: "",
+    message: "",
+  });
 
-const showCustomAlert = (title: string, message: string) => {
-  setAlertData({ title, message });
-  setCustomAlertVisible(true);
-};
+  const showCustomAlert = (title: string, message: string) => {
+    setAlertData({ title, message });
+    setCustomAlertVisible(true);
+  };
 
   const login = () => {
     navigation.navigate("stackLogin");
@@ -100,7 +109,6 @@ const showCustomAlert = (title: string, message: string) => {
       if (response.status === 200 || response.status === 201) {
         showCustomAlert("Sucesso", "Cadastro realizado com sucesso!");
         navigation.navigate("stackHome");
-
       } else {
         console.log("Erro ao cadastrar", response);
       }
@@ -170,10 +178,11 @@ const showCustomAlert = (title: string, message: string) => {
           </View>
         </ImageBackground>
         <CustomAlert
-        visible={customAlertVisible}
-        title={alertData.title}
-        message={alertData.message}
-        onClose={() => setCustomAlertVisible(false)}/>
+          visible={customAlertVisible}
+          title={alertData.title}
+          message={alertData.message}
+          onClose={() => setCustomAlertVisible(false)}
+        />
       </View>
     </TouchableWithoutFeedback>
   );

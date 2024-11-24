@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
 
   imagemdeFundo: {
     flex: 1,
-    width: "100%"
+    width: "100%",
   },
 
   header: {
@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
 
   boxPesquisar: {
     flexDirection: "row",
-    alignSelf: "center"
+    alignSelf: "center",
   },
 
   pesquisarInput: {
@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
     height: 47,
     borderRadius: 22,
   },
-  
+
   cards: {
     flex: 1,
     justifyContent: "center",
@@ -91,7 +91,7 @@ export const styles = StyleSheet.create({
 
   boxInfo: {
     flexDirection: "row",
-    gap: 8
+    gap: 8,
   },
   boxDetalhes: {
     gap: 10,
@@ -103,13 +103,13 @@ export const styles = StyleSheet.create({
     height: 35,
     borderRadius: 5,
     backgroundColor: "#311A05",
-    paddingTop: 5
+    paddingTop: 5,
   },
   txtAdotar: {
-      fontFamily: "ZillaSlab_700Bold",
-      fontSize: 22,
-      textAlign: "center",
-      color: "white",
+    fontFamily: "ZillaSlab_700Bold",
+    fontSize: 22,
+    textAlign: "center",
+    color: "white",
   },
 
   name: {
@@ -124,8 +124,4 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
   },
-
 });
-
-
-
