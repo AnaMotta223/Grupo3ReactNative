@@ -30,7 +30,6 @@ import {
   ZillaSlab_700Bold,
 } from "@expo-google-fonts/zilla-slab";
 import { PropsApi, useAuth } from "../../hooks/useAuth";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import axios from "axios";
 interface ResponseApi {
   id: number;
