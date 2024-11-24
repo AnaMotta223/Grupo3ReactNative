@@ -7,7 +7,7 @@ export default function Routes() {
   return (
     <NavigationContainer>
       <AuthProvider>
-      <StackRoutes />
+        <StackRoutes />
       </AuthProvider>
     </NavigationContainer>
   );

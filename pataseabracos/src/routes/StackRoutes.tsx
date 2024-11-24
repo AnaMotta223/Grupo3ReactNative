@@ -4,9 +4,8 @@ import { Cadastrar } from "../screens/Cadastrar";
 import { Login } from "../screens/Login";
 import { TabRoutes } from "./tab.routes";
 import { AnimaisCadastrados } from "../screens/AnimaisCadastrados";
-import { Chat } from '../screens/Chat';
+import { Chat } from "../screens/Chat";
 import { AnimaisAdotados } from "../screens/AnimaisAdotados";
-import { HomeAdmin } from "../screens/HomeAdmin";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,17 +27,17 @@ export default function StackRoutes() {
         component={TabRoutes}
         options={{ headerShown: false, gestureEnabled: false }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="stackAnimaisCadastrados"
         component={AnimaisCadastrados}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="stackChat"  
-        component={Chat}  
+        name="stackChat"
+        component={Chat}
         options={{ headerShown: false }}
-      /> 
-    <Stack.Screen
+      />
+      <Stack.Screen
         name="stackAnimaisAdotados"
         component={AnimaisAdotados}
         options={{ headerShown: false }}

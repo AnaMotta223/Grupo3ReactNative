@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
   name: {
     fontSize: 25,
     marginTop: 10,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
 
   content: {
@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
     marginBottom: 25,
     elevation: 5,
     width: 350,
-    flexDirection: "column", // Permite o título e a área de informações ficarem empilhados
+    flexDirection: "column", 
     justifyContent: "space-between",
     alignItems: "flex-start",
   },
@@ -82,21 +82,20 @@ export const styles = StyleSheet.create({
     width: 200,
     height: 20,
     alignItems: "center",
-    borderRadius: 10
+    borderRadius: 10,
   },
 
-  bottonConfigText:{
-    textAlign: "center"
+  bottonConfigText: {
+    textAlign: "center",
   },
 
   cardTitle: {
     fontSize: 16,
     flex: 1,
-    marginBottom: 5
+    marginBottom: 5,
   },
 
-  contentCardButton: {
-  },
+  contentCardButton: {},
 
   footer: {
     backgroundColor: "#708D73",
@@ -109,15 +108,14 @@ export const styles = StyleSheet.create({
 
   footerText: {
     paddingLeft: 100,
-    color: "#8B0000"
+    color: "#8B0000",
   },
 
-  scroll:{
+  scroll: {
     width: "100%",
   },
 
-  footerBotton:{
+  footerBotton: {
     alignSelf: "center",
   },
-
 });

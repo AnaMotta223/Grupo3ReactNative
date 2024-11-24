@@ -3,19 +3,17 @@ import { PerfilUsuario } from "../screens/Perfil";
 import { Home } from "../screens/Home";
 import { Mensagens } from "../screens/Mensagens";
 import { CadastroPet } from "../screens/CadastroPet";
-import Entypo from '@expo/vector-icons/Entypo';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import Entypo from "@expo/vector-icons/Entypo";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { HomeAdmin } from "../screens/HomeAdmin";
 import { useAuth } from "../hooks/useAuth";
-import { Text } from "react-native";
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 const Tab = createBottomTabNavigator();
 
 export function TabRoutes() {
-  const { username} = useAuth();
-
+  const { username } = useAuth();
 
   return (
     <Tab.Navigator
@@ -23,19 +21,16 @@ export function TabRoutes() {
         headerShown: false,
         tabBarStyle: {
           backgroundColor: "#B68458",
-          borderColor: "transparent"
+          borderColor: "transparent",
         },
         tabBarShowLabel: false,
       }}
     >
       <Tab.Screen
-        
         name="TabHome"
         component={Home}
-      options={{
-          tabBarIcon: () => (
-              <Entypo name="home" size={32} color='#fff' />
-          )
+        options={{
+          tabBarIcon: () => <Entypo name="home" size={32} color="#fff" />,
         }}
       />
 
@@ -44,11 +39,11 @@ export function TabRoutes() {
         component={CadastroPet}
         options={{
           tabBarIcon: () => (
-              <MaterialIcons name="assignment-add" size={32} color='#fff' />
+            <MaterialIcons name="assignment-add" size={32} color="#fff" />
           ),
           tabBarStyle: {
             display: "none",
-          }
+          },
         }}
       />
 
@@ -56,9 +51,7 @@ export function TabRoutes() {
         name="Mensagens"
         component={Mensagens}
         options={{
-          tabBarIcon: () => (
-              <Entypo name="chat" size={32} color='#fff' />
-          )
+          tabBarIcon: () => <Entypo name="chat" size={32} color="#fff" />,
         }}
       />
 
@@ -67,27 +60,22 @@ export function TabRoutes() {
         component={PerfilUsuario}
         options={{
           tabBarIcon: () => (
-              <FontAwesome6 name="circle-user" size={32} color='#fff' />
-          )
+            <FontAwesome6 name="circle-user" size={32} color="#fff" />
+          ),
         }}
       />
 
-         { username==="Admin" || username==="Noé" ? (
-           <Tab.Screen 
-           name="Admin"
-           component={HomeAdmin}
-           options={{
-             tabBarIcon: () => (
+      {username === "Admin" || username === "Noé" ? (
+        <Tab.Screen
+          name="Admin"
+          component={HomeAdmin}
+          options={{
+            tabBarIcon: () => (
               <FontAwesome5 name="crown" size={25} color="white" />
-             )
-           }}
-           />
-         ): (
-            null
-         )}
-
-
-     
+            ),
+          }}
+        />
+      ) : null}
     </Tab.Navigator>
   );
 }
