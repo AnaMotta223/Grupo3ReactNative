@@ -42,11 +42,6 @@ export const AnimaisCadastrados = () => {
               data={cadastrados}
               renderItem={({ item }) => (
                 <View style={[styles.boxCard, styles.elevation]}>
-                  <TouchableOpacity
-                    style={styles.botaoDeletar}
-                  >
-                    <MaterialIcons name="delete" size={30} color="red" />
-                  </TouchableOpacity>
                   <View style={styles.boxInfo}>
                     <Text style={styles.name}>{`${item.nome},`}</Text>
                     <Text style={styles.name}>{item.raca}</Text>

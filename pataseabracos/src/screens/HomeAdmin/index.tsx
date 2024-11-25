@@ -221,12 +221,6 @@ const showCustomAlert = (title: string, message: string) => {
                         <Text style={styles.name}>{`${item.nome},`}</Text>
                         <Text style={styles.name}>{item.raca}</Text>
                       </View>
-                      <TouchableOpacity
-                        style={styles.btnAdotar}
-                        onPress={() => handleAdocoes(item)}
-                      >
-                        <Text style={styles.txtAdotar}>Adotar</Text>
-                      </TouchableOpacity>
                     </View>
                   </View>
                 )}
