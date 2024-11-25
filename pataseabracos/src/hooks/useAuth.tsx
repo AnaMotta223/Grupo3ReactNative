@@ -80,6 +80,7 @@ export const AuthProvider = ({ children }: any) => {
       if (value !== null) {
         const jsonValue = JSON.parse(value);
         setUsername(jsonValue);
+        navigation.navigate("stackHome")
       }
 
       const valueAnimais = await AsyncStorage.getItem("@Animal");
