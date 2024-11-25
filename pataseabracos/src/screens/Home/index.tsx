@@ -17,7 +17,13 @@ interface ResponseApi {
   id: number;
   nome: string;
   raca: string;
+  idade: string;
+  peso: string;
   tipo: string;
+  sexo: string;
+  observacao: string;
+  localidade: string;
+  usernameDono: string;
 }
 
 export const Home = () => {
@@ -173,6 +179,12 @@ export const Home = () => {
                         onPress={() => handleAdocoes(item)}
                       >
                         <Text style={styles.txtAdotar}>Adotar</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.btnAdotar}
+                        onPress={() => handleMais(item.idade, item.peso, item.sexo, item.observacao, item.localidade, item.usernameDono)}
+                      >
+                        <Text style={styles.txtAdotar}>Mais</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
