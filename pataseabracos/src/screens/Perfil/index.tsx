@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Alert,
   Image,
@@ -17,7 +17,6 @@ import Cima from "../../assets/setaCima.png";
 import Baixo from "../../assets/setaBaixo.png";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 import { useAuth } from "../../hooks/useAuth";
 
 
@@ -28,18 +27,8 @@ const navigation = useNavigation();
 
   // Parte dos cards
 
-  const [isAdocoesOpen, setIsAdocoesOpen] = useState(false);
-  const [isAnimaisOpen, setIsAnimaisOpen] = useState(false);
   const [isConfiguracoesOpen, setIsConfiguracoesOpen] = useState(false);
   const { username, handleLogOut } = useAuth();
-
-  const toggleAdocoes = () => {
-    setIsAdocoesOpen(!isAdocoesOpen);
-  };
-
-  const toggleAnimais = () => {
-    setIsAnimaisOpen(!isAnimaisOpen);
-  };
 
   const toggleConfiguracoes = () => {
     setIsConfiguracoesOpen(!isConfiguracoesOpen);
@@ -177,16 +166,6 @@ const navigation = useNavigation();
                   >
                     <Text style={styles.bottonConfigText}>
                       Editar capa de Perfil
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() =>
-                      Alert.alert("Função ainda não adicionada :(")
-                    }
-                    style={styles.contentCardBottonConfig}
-                  >
-                    <Text style={styles.bottonConfigText}>
-                      Editar nome de usuário
                     </Text>
                   </TouchableOpacity>
                 </View>

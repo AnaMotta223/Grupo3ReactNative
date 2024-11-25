@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useState } from "react";
-import {Alert,Image,ImageBackground,Keyboard,Text, TouchableWithoutFeedback,View,} from "react-native";
+import {Image,ImageBackground,Keyboard,Text, TouchableWithoutFeedback,View,} from "react-native";
 import imagemFundo from "../../assets/fundo25.png";
 import logo from "../../assets/logo.png";
 import BotaoLogin from "../../components/LoginBotao";
@@ -29,33 +29,34 @@ export const Login = () => {
   //const [username, setUsername] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
   //const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { username, setUsername, checkAuthentication, isLoading } = useAuth();
+  const { checkAuthentication, username, setUsername, isLoading } = useAuth();
 
   const login = async () => {
-    //setIsLoading(true);
-
-    if (username === "" || senha === "") {
-      showCustomAlert("Erro", "Preencha os campos!");
-    } else {
-      await axios
-        .get("https://6722c0392108960b9cc576f5.mockapi.io/usuarios")
-        .then((response) => {
-          const usuarioValido = response.data.find(
-            (user: any) => user.username === username && user.senha === senha
-          );
-
-          if (!usuarioValido) {
-            showCustomAlert("Erro", "Usuário ou senha inválidos!");
-          } else {
-            checkAuthentication(username);
-          }
-        })
-
-        .catch((error) => {
-          console.log("Erro ao consumir a api", error);
-        });
-        //setIsLoading(false);
-    }
+ 
+      if (username === "" || senha === "") {
+        showCustomAlert("Erro", "Preencha os campos!");
+      } else {
+        await axios
+          .get("https://6722c0392108960b9cc576f5.mockapi.io/usuarios")
+          .then((response) => {
+            const usuarioValido = response.data.find(
+              (user: any) => user.username === username && user.senha === senha
+            );
+  
+            if (!usuarioValido) {
+              showCustomAlert("Erro", "Usuário ou senha inválidos!");
+            } else {
+              console.log("passei aqui");
+              
+              checkAuthentication(username);
+            }
+          })
+  
+          .catch((error) => {
+            console.log("Erro ao consumir a api", error);
+          });
+      }
+    
   };
 
   const cadastrar = () => {

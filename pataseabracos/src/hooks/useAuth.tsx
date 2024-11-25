@@ -15,7 +15,7 @@ export interface PropsCadastro {
 type PropsContext = {
   username: string;
   setUsername: (value: string) => void;
-  checkAuthentication: (email: string) => void;
+  checkAuthentication: (username: string) => void;
   handleLogOut: () => void;
   isLoading: boolean;
   adocoes: PropsApi[];
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }: any) => {
     navigation.navigate("stackLogin");
   };
 
-  const storeData = async (username: string, adocoes?: PropsApi[]) => {
+  const storeData = async (username: string, adocoes?: PropsApi[], cadastrados?:PropsCadastro[]) => {
     try {
       const jsonValueUser = JSON.stringify(username);
       const jsonValueAnimal = JSON.stringify(adocoes);
@@ -72,10 +72,8 @@ export const AuthProvider = ({ children }: any) => {
       await AsyncStorage.setItem("@Animal", jsonValueAnimal);
       await AsyncStorage.setItem("@Cadastros", jsonValueAnimaisCadastrados);
 
-      // const jsonValueUser = JSON.stringify({username, adocoes});
-      // await AsyncStorage.setItem('@User', jsonValueUser);
     } catch (error) {
-      console.log("Erro ao salvar dados!");
+      return null
     }
   };
 
@@ -86,6 +84,7 @@ export const AuthProvider = ({ children }: any) => {
       if (value !== null) {
         const jsonValue = JSON.parse(value);
         setUsername(jsonValue);
+        navigation.navigate("stackHome");
       }
 
       const valueAnimais = await AsyncStorage.getItem("@Animal");
@@ -100,7 +99,6 @@ export const AuthProvider = ({ children }: any) => {
         setCadastrados(jsonValue);
       }
 
-      navigation.navigate("stackHome");
     } catch (error) {
       console.log("Erro ao buscar dados!");
     }

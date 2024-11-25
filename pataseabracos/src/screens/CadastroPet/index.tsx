@@ -25,7 +25,7 @@ export const CadastroPet = () => {
   const [tipoSelecionado, setTipoSelecionado] = useState<string | null>(null);
   const [sexoSelecionado, setSexoSelecionado] = useState<string | null>(null);
   const [nome, setNome] = useState("");
-  const [user, setUser] = useState("")
+  const [usernameDono, setUsernameDono] = useState("")
   const [raca, setRaca] = useState("");
   const [idade, setIdade] = useState("");
   const [peso, setPeso] = useState("");
@@ -36,7 +36,7 @@ export const CadastroPet = () => {
   const handleCadastro = async (value: PropsCadastro) => {
     
 
-    if (!tipoSelecionado || !sexoSelecionado || !nome || !user) {
+    if (!tipoSelecionado || !sexoSelecionado || !nome || !usernameDono) {
       setAlertData({
         title: "Atenção",
         message: "Preencha todos os campos obrigatórios!",
@@ -52,7 +52,7 @@ export const CadastroPet = () => {
         tipo: tipoSelecionado ? tipoSelecionado.toUpperCase() : null, 
         sexo: sexoConvertido,
         nome,
-        user,
+        usernameDono,
         raca,
         idade,
         peso,
@@ -127,8 +127,8 @@ export const CadastroPet = () => {
           <TextInput
             style={styles.contentInput}
             placeholder="Usuário:"
-            value={user}
-            onChangeText={setUser}
+            value={usernameDono}
+            onChangeText={setUsernameDono}
           />
 
           <TextInput

@@ -77,21 +77,25 @@ export const Cadastrar = () => {
       return;
     } else if (senha !== confirmaSenha) {
       showCustomAlert("Erro", "Senha e confirmar senha não são iguais");
+      return 
     }
-
-    try {
-      const usuarioValido = users.some(
-        (user) => user.email === email || user.username === username
-      );
-
-      if (usuarioValido) {
-        showCustomAlert("Erro", "Email ou username já estão em uso");
-      } else {
-        cadastro();
+    else {
+      try {
+        const usuarioValido = users.some(
+          (user) => user.email === email || user.username === username
+        );
+  
+        if (usuarioValido) {
+          showCustomAlert("Erro", "Email ou username já estão em uso");
+        } else {
+          cadastro();
+        }
+      } catch (error) {
+        console.log("Erro ao consumir a api", error);
       }
-    } catch (error) {
-      console.log("Erro ao consumir a api", error);
     }
+
+   
   };
 
   const cadastro = async () => {
@@ -108,7 +112,7 @@ export const Cadastrar = () => {
 
       if (response.status === 200 || response.status === 201) {
         showCustomAlert("Sucesso", "Cadastro realizado com sucesso!");
-        navigation.navigate("stackHome");
+        navigation.navigate("stackLogin");
       } else {
         console.log("Erro ao cadastrar", response);
       }
