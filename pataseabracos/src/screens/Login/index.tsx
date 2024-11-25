@@ -12,6 +12,7 @@ import TextInputLogin from "../../components/LoginInput";
 import { useAuth } from "../../hooks/useAuth";
 import { styles } from "./style";
 
+
 export const Login = () => {
   const navigation = useNavigation();
   const { checkAuthentication, username, setUsername, isLoading } = useAuth();

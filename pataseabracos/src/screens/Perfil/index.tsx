@@ -10,10 +10,24 @@ import Baixo from "../../assets/setaBaixo.png";
 import Cima from "../../assets/setaCima.png";
 import { useAuth } from "../../hooks/useAuth";
 import { styles } from "./style";
+import { CustomAlert } from "../../components/CustomAlert";
+
 
 export const PerfilUsuario = () => {
 
   useFonts({ZillaSlab_400Regular,ZillaSlab_700Bold});
+
+  const [customAlertVisible, setCustomAlertVisible] = useState(false);
+  const [alertData, setAlertData] = useState<{ title: string; message: string }>({
+  title: "",
+  message: "",});
+
+  const showCustomAlert = (title: string, message: string) => {
+    setAlertData({ title, message });
+    setCustomAlertVisible(true);
+  };
+  
+
   
   //Parte das navegações
   const navigation = useNavigation();
@@ -28,7 +42,7 @@ export const PerfilUsuario = () => {
     const result = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (!result.granted) {
-      Alert.alert("Permissão necessária", "Precisamos de acesso à galeria.");
+      showCustomAlert("Permissão necessária", "Precisamos de acesso à galeria.");
       return;
     }
     Alert.alert("Alterar Imagem", "Escolha uma opção:", [
@@ -63,7 +77,7 @@ export const PerfilUsuario = () => {
     type: "profile" | "cover"
   ) => {
     if (result.canceled) {
-      Alert.alert("Seleção cancelada");
+      showCustomAlert("Seleção cancelada", "Você não selecionou nenhuma imagem.");
     } else if (result.assets && result.assets.length > 0) {
       const uri = result.assets[0].uri;
       if (type === "profile") {
@@ -72,7 +86,7 @@ export const PerfilUsuario = () => {
         setProfileCover(uri);
       }
     } else {
-      Alert.alert("Erro", "Nenhuma imagem foi selecionada.");
+      showCustomAlert("Erro", "Nenhuma imagem foi selecionada.");
     }
   };
 
@@ -148,6 +162,12 @@ export const PerfilUsuario = () => {
             </View>
           </TouchableOpacity>
         </ScrollView>
+        <CustomAlert
+        visible={customAlertVisible}
+        title={alertData.title}
+        message={alertData.message}
+        onClose={() => setCustomAlertVisible(false)}/>
+
       </View>
     </ImageBackground>
   );

@@ -9,10 +9,12 @@ import fundoEscuro from "../../assets/fundoEscuro.jpg";
 import gato from "../../assets/gatoCard.png";
 import hamster from "../../assets/hamsterCard.png";
 import logo from "../../assets/logo.png";
+import { CustomAlert } from "../../components/CustomAlert";
 import passaro from "../../assets/passaroCard.png";
 import peixe from "../../assets/peixeCard.png";
 import { PropsApi, useAuth } from "../../hooks/useAuth";
 import { ServiceGetAnimais } from "../../service/ServiceGetAnimais";
+
 import { styles } from "./style";
 
 
@@ -29,6 +31,18 @@ export const HomeAdmin = () => {
   const [busca, setBusca] = useState<string>("");
   const { adocoes, setAdocoes } = useAuth();
   useFonts({ ZillaSlab_400Regular, ZillaSlab_700Bold });
+
+  const [customAlertVisible, setCustomAlertVisible] = useState(false);
+  const [alertData, setAlertData] = useState<{ title: string; message: string }>({
+  title: "",
+  message: "",
+});
+
+
+const showCustomAlert = (title: string, message: string) => {
+  setAlertData({ title, message });
+  setCustomAlertVisible(true);
+};
 
   const handleAdocoes = async (value: PropsApi) => {
     const id = adocoes.findIndex(
@@ -60,8 +74,9 @@ export const HomeAdmin = () => {
     try {
       setIsloading(true);
       axios.delete(`https://6722c0692108960b9cc578da.mockapi.io/animais/${id}`);
-      Alert.alert("Animal deletado!");
+      showCustomAlert("Sucesso", "Animal deletado com sucesso!");
     } catch (erro) {
+      showCustomAlert("Erro", "Não foi possível deletar o animal.");
       console.log("Erro ao deletar ", erro);
     } finally {
       setIsloading(false);
@@ -215,8 +230,14 @@ export const HomeAdmin = () => {
                     </View>
                   </View>
                 )}
+                
               />
             )}
+            <CustomAlert
+            visible={customAlertVisible}
+            title={alertData.title}
+            message={alertData.message}
+            onClose={() => setCustomAlertVisible(false)}/>
           </View>
         </ImageBackground>
       </View>

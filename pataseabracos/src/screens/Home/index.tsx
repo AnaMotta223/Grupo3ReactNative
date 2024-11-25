@@ -2,7 +2,7 @@ import { useFonts, ZillaSlab_400Regular, ZillaSlab_700Bold } from "@expo-google-
 import Ionicons from "@expo/vector-icons/Ionicons";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Image, ImageBackground, Keyboard, RefreshControl, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import { ActivityIndicator, Alert, FlatList, Image, ImageBackground, Keyboard, RefreshControl, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import cachorro from "../../assets/cachorroCard.png";
 import fundoEscuro from "../../assets/fundoEscuro.jpg";
 import gato from "../../assets/gatoCard.png";
@@ -13,6 +13,8 @@ import peixe from "../../assets/peixeCard.png";
 import { PropsApi, useAuth } from "../../hooks/useAuth";
 import { ServiceGetAnimais } from "../../service/ServiceGetAnimais";
 import { styles } from "./style";
+import { CustomAlert } from "../../components/CustomAlert";
+
 
 interface ResponseApi {
   id: number;
@@ -28,12 +30,37 @@ interface ResponseApi {
 }
 
 export const Home = () => {
+
+  const [customAlertVisible, setCustomAlertVisible] = useState(false);
+  const [alertData, setAlertData] = useState<{ title: string; message: string }>({
+  title: "",
+  message: "",});
+
+  const showCustomAlert = (title: string, message: string) => {
+    setAlertData({ title, message });
+    setCustomAlertVisible(true);
+  };
+  
   const [animais, setAnimais] = useState<ResponseApi[]>([]);
   const [isLoading, setIsloading] = useState<boolean>(false);
   const [refresh, setRefresh] = useState<boolean>(false);
   const [busca, setBusca] = useState<string>("");
   const { adocoes, setAdocoes } = useAuth();
   useFonts({ ZillaSlab_400Regular, ZillaSlab_700Bold });
+
+  const handleMais = (idade: string, peso: string, sexo: string, observacao: string, localidade: string, usernameDono: string) => {
+    idade === "" || null ? idade = "Não informada" : idade
+    peso === "" || null ? peso = "Não informado" : peso
+    sexo === "M" ? sexo = "Macho" : "Fêmea";
+    sexo === "F" ? sexo = "Fêmea" : "Macho";
+    observacao === "" || null ? observacao = "Não informada" : observacao
+    localidade === "" || null ? localidade = "Não informada" : localidade
+    usernameDono === "" || null ? usernameDono = "Não informado" : usernameDono
+    showCustomAlert(
+      "Informações adicionais",
+      `Idade: ${idade}\nPeso: ${peso}\nSexo: ${sexo}\nObservação: ${observacao}\nLocalidade: ${localidade}\nUsername dono temporário: ${usernameDono}`
+    );
+  }
 
   const handleAdocoes = async (value: PropsApi) => {
     const id = adocoes.findIndex(
@@ -189,6 +216,11 @@ export const Home = () => {
                       >
                         <Text style={styles.txtAdotar}>Mais</Text>
                       </TouchableOpacity>
+                      <CustomAlert
+                      visible={customAlertVisible}
+                      title={alertData.title}
+                      message={alertData.message}
+                      onClose={() => setCustomAlertVisible(false)}/>
                     </View>
                   </View>
                 )}
