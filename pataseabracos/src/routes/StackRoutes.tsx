@@ -1,11 +1,11 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import { Cadastrar } from "../screens/Cadastrar";
-import { Login } from "../screens/Login";
-import { TabRoutes } from "./tab.routes";
-import { AnimaisCadastrados } from "../screens/AnimaisCadastrados";
-import { Chat } from "../screens/Chat";
 import { AnimaisAdotados } from "../screens/AnimaisAdotados";
+import { AnimaisCadastrados } from "../screens/AnimaisCadastrados";
+import { Cadastrar } from "../screens/Cadastrar";
+import { Chat } from "../screens/Chat";
+import { Login } from "../screens/Login";
+import { TabRoutes } from "./TabRoutes";
 
 const Stack = createNativeStackNavigator();
 

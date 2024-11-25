@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
 
   imagemdeFundo: {
     flex: 1,
-    width: "100%"
+    width: "100%",
   },
 
   header: {
@@ -83,11 +83,6 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 12,
   },
 
-  tiposAnimais: {
-    fontSize: 40,
-    color: "#FFF",
-  },
-
   boxInfo: {
     flexDirection: "row",
     alignItems: "center",
@@ -98,5 +93,4 @@ export const styles = StyleSheet.create({
     fontFamily: "ZillaSlab_700Bold",
     fontSize: 25,
   },
-
 });

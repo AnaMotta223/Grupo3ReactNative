@@ -1,4 +1,4 @@
-declare module "*.jpeg"
-declare module "*.jpg"
-declare module "*.png"
-declare module "*.webapp"
+declare module "*.jpeg";
+declare module "*.jpg";
+declare module "*.png";
+declare module "*.webapp";

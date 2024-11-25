@@ -1,15 +1,15 @@
 import React from "react";
-import {Modal, View,Text,TouchableOpacity,  GestureResponderEvent,} from "react-native";
-import {styles} from './style'
+import { GestureResponderEvent, Modal, Text, TouchableOpacity, View } from "react-native";
+import { styles } from "./style";
 
-  interface CustomAlertProps {
+interface CustomAlertProps {
   visible: boolean;
   title: string;
   message: string;
   onClose: (event: GestureResponderEvent) => void;
 }
 
- export const CustomAlert: React.FC<CustomAlertProps> = ({visible,title,message,onClose,}) => {
+export const CustomAlert: React.FC<CustomAlertProps> = ({ visible, title, message, onClose }) => {
   return (
     <Modal
       transparent={true}

@@ -57,6 +57,12 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
   },
 
+  icones: {
+    transform: [{ translateX: 35 }],
+    zIndex: 999,
+    marginTop: 8,
+  },
+
   pesquisarInput: {
     fontFamily: "ZillaSlab_400Regular",
     fontSize: 22,
@@ -75,6 +81,12 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
   },
 
+  atualizar: {
+    width: "100%",
+    height: "auto",
+    paddingLeft: "20%",
+  },
+
   boxCard: {
     width: 250,
     backgroundColor: "#F3E6CE",
@@ -89,27 +101,23 @@ export const styles = StyleSheet.create({
     shadowColor: "#000",
   },
 
-  boxInfo: {
-    flexDirection: "row",
-    gap: 8,
+  pet: {
+    alignSelf: "center",
+    width: 250,
+    height: 200,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
   },
+
   boxDetalhes: {
     gap: 10,
     alignItems: "center",
     justifyContent: "center",
   },
-  btnAdotar: {
-    width: "40%",
-    height: 35,
-    borderRadius: 5,
-    backgroundColor: "#311A05",
-    paddingTop: 5,
-  },
-  txtAdotar: {
-    fontFamily: "ZillaSlab_700Bold",
-    fontSize: 22,
-    textAlign: "center",
-    color: "white",
+
+  boxInfo: {
+    flexDirection: "row",
+    gap: 8,
   },
 
   name: {
@@ -117,11 +125,18 @@ export const styles = StyleSheet.create({
     fontSize: 25,
   },
 
-  pet: {
-    alignSelf: "center",
-    width: 250,
-    height: 200,
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
+  btnAdotar: {
+    width: "40%",
+    height: 35,
+    borderRadius: 5,
+    backgroundColor: "#311A05",
+    paddingTop: 5,
+  },
+
+  txtAdotar: {
+    fontFamily: "ZillaSlab_700Bold",
+    fontSize: 22,
+    textAlign: "center",
+    color: "white",
   },
 });

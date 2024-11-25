@@ -1,75 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
-  imagemdeFundo: {
-    flex: 1,
-  },
-  header: {
-    backgroundColor: "#B68458",
-    flexDirection: "row",
-    height: 90,
-    width: "100%",
-    textAlign: "center",
-  },
-
-  headerTitle: {
-    marginTop: 20,
-    fontSize: 24,
-    alignSelf: "center",
-    marginLeft: 25,
-    fontFamily: "ZillaSlab_700Bold",
-  },
-
-  headerimg: {
-    marginTop: 40,
-    marginLeft: 10,
-  },
-
-  messagesList: {
-    flexGrow: 1,
-    paddingHorizontal: 16,
-    paddingBottom: 80,
-  },
-
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 8,
-    position: "absolute",
-    bottom: 10,
-    left: 10,
-    right: 10,
-    backgroundColor: "#fff",
-    borderRadius: 30,
-  },
-
-  input: {
-    flex: 1,
-    height: 40,
-    borderColor: "#ddd",
-    borderRadius: 20,
-    paddingHorizontal: 12,
-    marginRight: 8,
-    backgroundColor: "#F3E6CE",
-  },
-
-  enviarButton: {
-    backgroundColor: "#708D73",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 25,
-  },
-
-  enviarButtonText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-
+export const styles = StyleSheet.create({
   message: {
     padding: 12,
     marginVertical: 4,
@@ -90,6 +21,61 @@ const styles = StyleSheet.create({
   messageText: {
     fontSize: 16,
     color: "#333",
+  },
+
+  optionsContainer: {
+    justifyContent: "flex-start",
+    marginTop: 20,
+  },
+
+  optionButton: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 12,
+    margin: 5,
+    alignItems: "center",
+    elevation: 2,
+  },
+
+  optionButtonText: {
+    color: "#333",
+    fontSize: 14,
+    textAlign: "center",
+  },
+
+  imagemdeFundo: {
+    flex: 1,
+  },
+
+  container: {
+    flex: 1,
+  },
+
+  header: {
+    backgroundColor: "#B68458",
+    flexDirection: "row",
+    height: 90,
+    width: "100%",
+    textAlign: "center",
+  },
+
+  headerimg: {
+    marginTop: 40,
+    marginLeft: 10,
+  },
+
+  headerTitle: {
+    marginTop: 20,
+    fontSize: 24,
+    alignSelf: "center",
+    marginLeft: 25,
+    fontFamily: "ZillaSlab_700Bold",
+  },
+
+  messagesList: {
+    flexGrow: 1,
+    paddingHorizontal: 16,
+    paddingBottom: 80,
   },
 
   card: {
@@ -131,25 +117,38 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 
-  optionsContainer: {
-    justifyContent: "flex-start",
-    marginTop: 20,
-  },
-
-  optionButton: {
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    padding: 12,
-    margin: 5,
+  inputContainer: {
+    flexDirection: "row",
     alignItems: "center",
-    elevation: 2,
+    padding: 8,
+    position: "absolute",
+    bottom: 10,
+    left: 10,
+    right: 10,
+    backgroundColor: "#fff",
+    borderRadius: 30,
   },
 
-  optionButtonText: {
-    color: "#333",
-    fontSize: 14,
-    textAlign: "center",
+  input: {
+    flex: 1,
+    height: 40,
+    borderColor: "#ddd",
+    borderRadius: 20,
+    paddingHorizontal: 12,
+    marginRight: 8,
+    backgroundColor: "#F3E6CE",
+  },
+
+  enviarButton: {
+    backgroundColor: "#708D73",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 25,
+  },
+
+  enviarButtonText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16,
   },
 });
-
-export default styles;

@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
 
   imagemdeFundo: {
     flex: 1,
-    width: "100%"
+    width: "100%",
   },
 
   header: {
@@ -52,12 +52,7 @@ export const styles = StyleSheet.create({
     fontSize: 40,
     color: "#000",
   },
-
-  tiposAnimais: {
-    fontSize: 40,
-    color: "#FFF",
-  },
-
+  
   cards: {
     flex: 1,
     justifyContent: "center",
@@ -78,6 +73,12 @@ export const styles = StyleSheet.create({
     elevation: 8,
     shadowColor: "#000",
   },
+  
+  botaoDeletar: {
+    marginTop: 5,
+    zIndex: 999,
+    position: "absolute",
+  },
 
   boxInfo: {
     paddingTop: 5,
@@ -91,11 +92,4 @@ export const styles = StyleSheet.create({
     fontSize: 25,
   },
 
-  pet: {
-    alignSelf: "center",
-    width: 250,
-    height: 200,
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
-  },
 });

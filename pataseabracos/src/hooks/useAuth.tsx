@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { useContext, createContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 export interface PropsApi {
   id: number;
   nome: string;
@@ -14,30 +14,29 @@ export interface PropsCadastro {
 
 type PropsContext = {
   username: string;
-  setUsername: (value: string) => void;
-  checkAuthentication: (email: string) => void;
-  handleLogOut: () => void;
   isLoading: boolean;
-  adocoes: PropsApi[];
+  setUsername: (value: string) => void;
   setAdocoes: (value: PropsApi[]) => void;
-  cadastrados: PropsCadastro[];
+  checkAuthentication: (username: string) => void;
   setCadastrados: (value: PropsCadastro[]) => void;
+  handleLogOut: () => void;
+  adocoes: PropsApi[];
+  cadastrados: PropsCadastro[];
 };
 
 const AuthContext = createContext<PropsContext>({
   username: "",
+  isLoading: false,
   setUsername: () => {},
   setAdocoes: () => {},
   checkAuthentication: () => {},
+  setCadastrados: () => {},
   handleLogOut: () => {},
-  isLoading: false,
   adocoes: [],
   cadastrados: [],
-  setCadastrados: () => {}
 });
 
 export const AuthProvider = ({ children }: any) => {
-  
   const navigation = useNavigation();
 
   const [username, setUsername] = useState<string>("");
@@ -47,8 +46,7 @@ export const AuthProvider = ({ children }: any) => {
 
   const checkAuthentication = (username: string) => {
     setIsLoading(true);
-
-     if (username != null) {
+    if (username != null) {
       setTimeout(() => {
         storeData(username);
         navigation.navigate("stackHome");
@@ -57,12 +55,11 @@ export const AuthProvider = ({ children }: any) => {
     }
   };
 
-  const handleLogOut = () => {
-    AsyncStorage.removeItem("@Usuario");
-    navigation.navigate("stackLogin");
-  };
-
-  const storeData = async (username: string, adocoes?: PropsApi[]) => {
+  const storeData = async (
+    username: string,
+    adocoes?: PropsApi[],
+    cadastrados?: PropsCadastro[]
+  ) => {
     try {
       const jsonValueUser = JSON.stringify(username);
       const jsonValueAnimal = JSON.stringify(adocoes);
@@ -71,9 +68,8 @@ export const AuthProvider = ({ children }: any) => {
       await AsyncStorage.setItem("@Usuario", jsonValueUser);
       await AsyncStorage.setItem("@Animal", jsonValueAnimal);
       await AsyncStorage.setItem("@Cadastros", jsonValueAnimaisCadastrados);
-
     } catch (error) {
-      return null
+      return null;
     }
   };
 
@@ -97,14 +93,16 @@ export const AuthProvider = ({ children }: any) => {
         const jsonValue = JSON.parse(valueAnimaisCadastrados);
         setCadastrados(jsonValue);
       }
-
-      navigation.navigate("stackHome");
     } catch (error) {
       console.log("Erro ao buscar dados!");
     }
     setIsLoading(false);
   };
-  
+
+  const handleLogOut = () => {
+    AsyncStorage.removeItem("@Usuario");
+    navigation.navigate("stackLogin");
+  };
 
   useEffect(() => {
     getData();
@@ -114,14 +112,14 @@ export const AuthProvider = ({ children }: any) => {
     <AuthContext.Provider
       value={{
         username,
-        setUsername,
-        checkAuthentication,
-        handleLogOut,
         isLoading,
-        adocoes,
+        setUsername,
         setAdocoes,
+        checkAuthentication,
+        setCadastrados,
+        handleLogOut,
+        adocoes,
         cadastrados,
-        setCadastrados
       }}
     >
       {children}

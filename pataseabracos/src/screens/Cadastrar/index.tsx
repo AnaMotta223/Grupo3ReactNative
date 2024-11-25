@@ -1,22 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  Alert,
-  Image,
-  ImageBackground,
-  Keyboard,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { Image, ImageBackground, Keyboard, Text, TouchableWithoutFeedback, View} from "react-native";
 import imagemFundo from "../../assets/fundo25.png";
 import logo from "../../assets/logo.png";
+import { CustomAlert } from "../../components/CustomAlert";
 import BotaoLogin from "../../components/LoginBotao";
 import BotaoCriarConta from "../../components/LoginBotao2";
 import TextInputLogin from "../../components/LoginInput";
 import { styles } from "./style";
-import { CustomAlert } from "../../components/CustomAlert";
 
 interface PropsApi {
   email: string;
@@ -25,30 +17,18 @@ interface PropsApi {
 
 export const Cadastrar = () => {
   const navigation = useNavigation();
-
   const [nome, setNome] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
   const [confirmaSenha, setConfirmaSenha] = useState<string>("");
   const [users, setUsers] = useState<PropsApi[]>([]);
-
   const [customAlertVisible, setCustomAlertVisible] = useState(false);
-  const [alertData, setAlertData] = useState<{
-    title: string;
-    message: string;
-  }>({
-    title: "",
-    message: "",
-  });
+  const [alertData, setAlertData] = useState<{title: string; message: string;}>({ title: "", message: ""});
 
   const showCustomAlert = (title: string, message: string) => {
     setAlertData({ title, message });
     setCustomAlertVisible(true);
-  };
-
-  const login = () => {
-    navigation.navigate("stackLogin");
   };
 
   const loadUsers = async () => {
@@ -74,23 +54,22 @@ export const Cadastrar = () => {
       confirmaSenha === ""
     ) {
       showCustomAlert("Erro", "Todos os campos devem ser preenchidos");
-      return;
     } else if (senha !== confirmaSenha) {
       showCustomAlert("Erro", "Senha e confirmar senha não são iguais");
-    }
+    } else {
+      try {
+        const usuarioValido = users.some(
+          (user) => user.email === email || user.username === username
+        );
 
-    try {
-      const usuarioValido = users.some(
-        (user) => user.email === email || user.username === username
-      );
-
-      if (usuarioValido) {
-        showCustomAlert("Erro", "Email ou username já estão em uso");
-      } else {
-        cadastro();
+        if (usuarioValido) {
+          showCustomAlert("Erro", "Email ou username já estão em uso");
+        } else {
+          cadastro();
+        }
+      } catch (error) {
+        console.log("Erro ao consumir a api", error);
       }
-    } catch (error) {
-      console.log("Erro ao consumir a api", error);
     }
   };
 
@@ -105,11 +84,11 @@ export const Cadastrar = () => {
           senha: senha,
         }
       );
-
       if (response.status === 200 || response.status === 201) {
         showCustomAlert("Sucesso", "Cadastro realizado com sucesso!");
-        navigation.navigate("stackHome");
+        navigation.navigate("stackLogin");
       } else {
+        showCustomAlert("Error", "Erro ao fazer o cadastro, tente novamente mais tarde");
         console.log("Erro ao cadastrar", response);
       }
     } catch (error) {
@@ -140,7 +119,7 @@ export const Cadastrar = () => {
             />
             <Text style={styles.titulo}>Patas e Abraços</Text>
             <Text style={styles.titulo}>Cadastro</Text>
-            <View style={styles.a} />
+            <View style={styles.espacamento} />
             <TextInputLogin
               placeholder="Nome Completo"
               typeIcon="person"
@@ -174,7 +153,7 @@ export const Cadastrar = () => {
               handleFunctionInput={(value) => setConfirmaSenha(value)}
             />
             <BotaoLogin titulo="Cadastrar" handleFunction={verificar} />
-            <BotaoCriarConta titulo="Voltar" handleFunction={login} />
+            <BotaoCriarConta titulo="Voltar" handleFunction={() => navigation.navigate("stackLogin")} />
           </View>
         </ImageBackground>
         <CustomAlert
