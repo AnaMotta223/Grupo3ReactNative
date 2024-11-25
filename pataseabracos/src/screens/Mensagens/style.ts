@@ -64,13 +64,14 @@ export const styles = StyleSheet.create({
   },
 
   messageName: {
-    fontWeight: "bold",
+    fontFamily: "ZillaSlab_700Bold",
     fontSize: 20,
     color: "#666",
     textAlign: "center",
   },
 
   messageText: {
+    fontFamily: "ZillaSlab_400Regular",
     fontSize: 17,
     color: "#666",
     textAlign: "center",
@@ -91,6 +92,7 @@ export const styles = StyleSheet.create({
   },
 
   popupButtonText: {
+    fontFamily: "ZillaSlab_400Regular",
     color: "#fff",
     fontSize: 16,
     textAlign: "center",
@@ -112,8 +114,8 @@ export const styles = StyleSheet.create({
   },
 
   modalTitle: {
+    fontFamily: "ZillaSlab_700Bold",
     fontSize: 24,
-    fontWeight: "bold",
     color: "#333",
     marginBottom: 10,
   },
@@ -126,6 +128,7 @@ export const styles = StyleSheet.create({
   },
 
   modalMessage: {
+    fontFamily: "ZillaSlab_400Regular",
     fontSize: 20,
     textAlign: "center",
     marginBottom: 20,
@@ -144,8 +147,9 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 10,
   },
-
+  
   buttonText: {
+    fontFamily: "ZillaSlab_400Regular",
     color: "#fff",
     fontSize: 16,
     textAlign: "center",

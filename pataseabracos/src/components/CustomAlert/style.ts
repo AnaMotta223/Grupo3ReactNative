@@ -17,13 +17,14 @@ export const styles = StyleSheet.create({
   },
 
   title: {
+    fontFamily: "ZillaSlab_700Bold",
     fontSize: 18,
-    fontWeight: "bold",
     marginBottom: 10,
     textAlign: "center",
   },
 
   message: {
+    fontFamily: "ZillaSlab_400Regular",
     fontSize: 16,
     textAlign: "center",
     marginBottom: 20,
@@ -37,8 +38,8 @@ export const styles = StyleSheet.create({
   },
 
   buttonText: {
+    fontFamily: "ZillaSlab_700Bold",
     color: "white",
-    fontWeight: "bold",
     fontSize: 16,
   },
 });

@@ -114,8 +114,9 @@ export const styles = StyleSheet.create({
   },
 
   dropdownButtonTxtStyle: {
+    fontFamily: "ZillaSlab_400Regular",
     flex: 1,
-    fontSize: 14,
+    fontSize: 15,
     color: "rgba(0, 0, 0, 0.5)",
   },
 
