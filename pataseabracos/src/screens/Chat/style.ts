@@ -7,27 +7,28 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     maxWidth: "80%",
   },
-
+  
   yourMessage: {
     backgroundColor: "#D2C2A4",
     alignSelf: "flex-end",
   },
-
+  
   otherMessage: {
     backgroundColor: "#F3E6CE",
     alignSelf: "flex-start",
   },
-
+  
   messageText: {
+    fontFamily: "ZillaSlab_400Regular",
     fontSize: 16,
     color: "#333",
   },
-
+  
   optionsContainer: {
     justifyContent: "flex-start",
     marginTop: 20,
   },
-
+  
   optionButton: {
     backgroundColor: "#fff",
     borderRadius: 10,
@@ -36,10 +37,11 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     elevation: 2,
   },
-
+  
   optionButtonText: {
+    fontFamily: "ZillaSlab_400Regular",
     color: "#333",
-    fontSize: 14,
+    fontSize: 16,
     textAlign: "center",
   },
 
@@ -89,14 +91,15 @@ export const styles = StyleSheet.create({
   },
 
   cardTitle: {
+    fontFamily: "ZillaSlab_700Bold",
     fontSize: 18,
-    fontWeight: "bold",
     marginBottom: 8,
     color: "#555",
     textAlign: "center",
   },
 
   cardText: {
+    fontFamily: "ZillaSlab_400Regular",
     fontSize: 14,
     marginBottom: 10,
     textAlign: "center",
@@ -112,8 +115,8 @@ export const styles = StyleSheet.create({
   },
 
   cardCloseButtonText: {
+    fontFamily: "ZillaSlab_700Bold",
     color: "#ffff",
-    fontWeight: "bold",
     fontSize: 15,
   },
 
@@ -130,6 +133,7 @@ export const styles = StyleSheet.create({
   },
 
   input: {
+    fontFamily: "ZillaSlab_400Regular",
     flex: 1,
     height: 40,
     borderColor: "#ddd",
@@ -147,8 +151,8 @@ export const styles = StyleSheet.create({
   },
 
   enviarButtonText: {
+    fontFamily: "ZillaSlab_700Bold",
     color: "white",
-    fontWeight: "bold",
     fontSize: 16,
   },
 });
