@@ -23,7 +23,7 @@ export default function TextInputLogin({
   const [viewPassword, setViewPassword] = useState<boolean>(true);
 
   return (
-    <View style={styles.container}>
+    <View>
       <TextInput
         style={styles.input}
         value={valueInput}

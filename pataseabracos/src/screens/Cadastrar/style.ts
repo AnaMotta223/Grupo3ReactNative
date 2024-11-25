@@ -36,11 +36,7 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  a: {
+  espacamento: {
     height: 15,
-  },
-
-  tela: {
-    flex: 1,
   },
 });

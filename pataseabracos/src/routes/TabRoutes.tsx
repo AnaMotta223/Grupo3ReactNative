@@ -1,14 +1,14 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { PerfilUsuario } from "../screens/Perfil";
-import { Home } from "../screens/Home";
-import { Mensagens } from "../screens/Mensagens";
-import { CadastroPet } from "../screens/CadastroPet";
 import Entypo from "@expo/vector-icons/Entypo";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import { HomeAdmin } from "../screens/HomeAdmin";
-import { useAuth } from "../hooks/useAuth";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useAuth } from "../hooks/useAuth";
+import { CadastroPet } from "../screens/CadastroPet";
+import { Home } from "../screens/Home";
+import { HomeAdmin } from "../screens/HomeAdmin";
+import { Mensagens } from "../screens/Mensagens";
+import { PerfilUsuario } from "../screens/Perfil";
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +35,7 @@ export function TabRoutes() {
       />
 
       <Tab.Screen
-        name="Cadastrar"
+        name="CadastrarPet"
         component={CadastroPet}
         options={{
           tabBarIcon: () => (

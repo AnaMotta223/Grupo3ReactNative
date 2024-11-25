@@ -1,18 +1,6 @@
-import {
-  useFonts,
-  ZillaSlab_400Regular,
-  ZillaSlab_700Bold,
-} from "@expo-google-fonts/zilla-slab";
+import { useFonts, ZillaSlab_400Regular, ZillaSlab_700Bold } from "@expo-google-fonts/zilla-slab";
 import React from "react";
-import {
-  FlatList,
-  Image,
-  ImageBackground,
-  Keyboard,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { FlatList, Image, ImageBackground, Keyboard, Text, TouchableWithoutFeedback, View } from "react-native";
 import cachorro from "../../assets/cachorroCard.png";
 import fundoEscuro from "../../assets/fundoEscuro.jpg";
 import gato from "../../assets/gatoCard.png";
@@ -25,10 +13,7 @@ import { styles } from "./style";
 
 export const AnimaisAdotados = () => {
   const { adocoes = [] } = useAuth();
-  useFonts({
-    ZillaSlab_400Regular,
-    ZillaSlab_700Bold,
-  });
+  useFonts({ ZillaSlab_400Regular, ZillaSlab_700Bold });
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
 import {
   Alert,
@@ -8,33 +10,20 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { styles } from "./style";
+import Perfil from "../../assets/fotoPerfil.png";
 import Fundo from "../../assets/fundoClaro2.jpg";
 import GatoFundo from "../../assets/gatoFundo.png";
-import Perfil from "../../assets/fotoPerfil.png";
-
-import Cima from "../../assets/setaCima.png";
 import Baixo from "../../assets/setaBaixo.png";
-import * as ImagePicker from "expo-image-picker";
-import { useNavigation } from "@react-navigation/native";
+import Cima from "../../assets/setaCima.png";
 import { useAuth } from "../../hooks/useAuth";
-
+import { styles } from "./style";
 
 export const PerfilUsuario = () => {
-
   //Parte das navegações
-const navigation = useNavigation();
-
+  const navigation = useNavigation();
   // Parte dos cards
-
   const [isConfiguracoesOpen, setIsConfiguracoesOpen] = useState(false);
   const { username, handleLogOut } = useAuth();
-
-  const toggleConfiguracoes = () => {
-    setIsConfiguracoesOpen(!isConfiguracoesOpen);
-  };
-
-
   // Parte da seleção de imagem
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
   const [profileCover, setProfileCover] = useState<string | null>(null);
@@ -46,7 +35,6 @@ const navigation = useNavigation();
       Alert.alert("Permissão necessária", "Precisamos de acesso à galeria.");
       return;
     }
-
     Alert.alert("Alterar Imagem", "Escolha uma opção:", [
       { text: "Câmera", onPress: () => openCamera(type) },
       { text: "Galeria", onPress: () => openGallery(type) },
@@ -92,14 +80,6 @@ const navigation = useNavigation();
     }
   };
 
-  const handleCadastroAnimais = () => {
-    navigation.navigate("stackAnimaisCadastrados");
-  }
-
-  const handleAdocaoAnimais = () => {
-    navigation.navigate("stackAnimaisAdotados");
-  }
-
   return (
     <ImageBackground source={Fundo} style={styles.background} blurRadius={6}>
       <View style={styles.container}>
@@ -110,7 +90,6 @@ const navigation = useNavigation();
               style={styles.capa}
             />
           </View>
-
           <View style={styles.profileArea}>
             <Image
               source={profilePicture ? { uri: profilePicture } : Perfil}
@@ -120,20 +99,15 @@ const navigation = useNavigation();
           </View>
 
           <View style={styles.content}>
-          <TouchableOpacity
-            onPress={handleCadastroAnimais}
-            >
-            <View style={styles.contentCard}>
-              <Text style={styles.cardTitle}>Seus animais para adoção</Text>
-            </View>
+            <TouchableOpacity onPress={() => navigation.navigate("stackAnimaisCadastrados")}>
+              <View style={styles.contentCard}>
+                <Text style={styles.cardTitle}>Seus animais para adoção</Text>
+              </View>
             </TouchableOpacity>
-
-            <TouchableOpacity
-            onPress={handleAdocaoAnimais}
-            >
-            <View style={styles.contentCard}>
-              <Text style={styles.cardTitle}>Suas Adoções</Text>
-            </View>
+            <TouchableOpacity onPress={() => navigation.navigate("stackAnimaisAdotados")}>
+              <View style={styles.contentCard}>
+                <Text style={styles.cardTitle}>Suas Adoções</Text>
+              </View>
             </TouchableOpacity>
             <View
               style={[
@@ -144,8 +118,7 @@ const navigation = useNavigation();
               <View style={styles.cardContent}>
                 <Text style={styles.cardTitle}>Configurações</Text>
                 <TouchableOpacity
-                  style={styles.contentCardButton}
-                  onPress={toggleConfiguracoes}
+                  onPress={() => setIsConfiguracoesOpen(!isConfiguracoesOpen)}
                 >
                   <Image source={isConfiguracoesOpen ? Cima : Baixo} />
                 </TouchableOpacity>
@@ -173,16 +146,13 @@ const navigation = useNavigation();
             </View>
           </View>
 
-          <TouchableOpacity 
-          onPress={handleLogOut}
-          style={styles.footerBotton}>
+          <TouchableOpacity onPress={handleLogOut} style={styles.footerBotton}>
             <View style={styles.footer}>
               <Text style={styles.footerText}>Sair</Text>
             </View>
           </TouchableOpacity>
         </ScrollView>
       </View>
-
     </ImageBackground>
   );
 };

@@ -1,36 +1,18 @@
-import {
-  ActivityIndicator,
-  Button,
-  FlatList,
-  Image,
-  ImageBackground,
-  Keyboard,
-  RefreshControl,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import { styles } from "./style";
-import fundoEscuro from "../../assets/fundoEscuro.jpg";
-import logo from "../../assets/logo.png";
-import cachorro from "../../assets/cachorroCard.png";
-import gato from "../../assets/gatoCard.png";
-import passaro from "../../assets/passaroCard.png";
-import hamster from "../../assets/hamsterCard.png";
-import peixe from "../../assets/peixeCard.png";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { ServiceGetAnimais } from "../../service/ServiceGetAnimais";
+import { useFonts, ZillaSlab_400Regular, ZillaSlab_700Bold } from "@expo-google-fonts/zilla-slab";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import {
-  useFonts,
-  ZillaSlab_400Regular,
-  ZillaSlab_700Bold,
-} from "@expo-google-fonts/zilla-slab";
-import { PropsApi, useAuth } from "../../hooks/useAuth";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, Image, ImageBackground, Keyboard, RefreshControl, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import cachorro from "../../assets/cachorroCard.png";
+import fundoEscuro from "../../assets/fundoEscuro.jpg";
+import gato from "../../assets/gatoCard.png";
+import hamster from "../../assets/hamsterCard.png";
+import logo from "../../assets/logo.png";
+import passaro from "../../assets/passaroCard.png";
+import peixe from "../../assets/peixeCard.png";
+import { PropsApi, useAuth } from "../../hooks/useAuth";
+import { ServiceGetAnimais } from "../../service/ServiceGetAnimais";
+import { styles } from "./style";
 interface ResponseApi {
   id: number;
   nome: string;
@@ -38,37 +20,26 @@ interface ResponseApi {
   tipo: string;
 }
 
-const Tab = createBottomTabNavigator();
-
 export const Home = () => {
   const [animais, setAnimais] = useState<ResponseApi[]>([]);
   const [isLoading, setIsloading] = useState<boolean>(false);
   const [refresh, setRefresh] = useState<boolean>(false);
   const [busca, setBusca] = useState<string>("");
   const { adocoes, setAdocoes } = useAuth();
-  const [fontLoaded] = useFonts({
-    ZillaSlab_400Regular,
-    ZillaSlab_700Bold,
-  });
-
-  const handleInputChange = (value: string) => {
-    setBusca(value);
-  };
+  useFonts({ ZillaSlab_400Regular, ZillaSlab_700Bold });
 
   const handleAdocoes = async (value: PropsApi) => {
     const id = adocoes.findIndex(
       (item) => String(item.id) === String(value.id)
     );
-    console.log(id);
 
     if (id !== -1) {
-      console.log("id igual");
       setAdocoes(adocoes.filter((item) => item.id !== value.id));
     } else {
-      console.log("adicionado");
       setAdocoes([...adocoes, value]);
-      axios.delete(`https://6722c0692108960b9cc578da.mockapi.io/animais/${value.id}`);
-      console.log("Deletado");
+      axios.delete(
+        `https://6722c0692108960b9cc578da.mockapi.io/animais/${value.id}`
+      );
     }
   };
 
@@ -125,11 +96,7 @@ export const Home = () => {
             <Text style={styles.titulo}>Animais para adoção</Text>
             <View style={styles.boxPesquisar}>
               <Ionicons
-                style={{
-                  transform: [{ translateX: 35 }],
-                  zIndex: 999,
-                  marginTop: 8,
-                }}
+                style={styles.icones}
                 name="search"
                 size={28}
                 color="#B68458"
@@ -137,7 +104,7 @@ export const Home = () => {
               <TextInput
                 style={[styles.pesquisarInput]}
                 value={busca}
-                onChangeText={handleInputChange}
+                onChangeText={(value) => setBusca(value)}
                 placeholder="Pesquisar"
                 placeholderTextColor="#B68458"
               />
@@ -149,7 +116,7 @@ export const Home = () => {
               <ActivityIndicator size={80} color="#ffffff" />
             ) : (
               <FlatList
-                style={{ width: "100%", height: "auto", paddingLeft: "20%" }}
+                style={styles.atualizar}
                 refreshControl={
                   <RefreshControl
                     refreshing={refresh}
