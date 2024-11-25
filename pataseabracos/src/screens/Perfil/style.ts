@@ -39,9 +39,10 @@ export const styles = StyleSheet.create({
   },
 
   name: {
+    fontFamily: "ZillaSlab_700Bold",
     fontSize: 25,
     marginTop: 10,
-    fontWeight: "bold",
+  
   },
 
   content: {
@@ -65,12 +66,14 @@ export const styles = StyleSheet.create({
   },
 
   cardTitle: {
+    fontFamily: "ZillaSlab_700Bold",
     fontSize: 16,
     flex: 1,
     marginBottom: 5,
   },
 
   cardContent: {
+    fontFamily: "ZillaSlab_700Bold",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -87,6 +90,7 @@ export const styles = StyleSheet.create({
   },
 
   contentCardBottonConfig: {
+    
     backgroundColor: "#708D73",
     margin: 5,
     width: 200,
@@ -96,6 +100,7 @@ export const styles = StyleSheet.create({
   },
 
   bottonConfigText: {
+    fontFamily: "ZillaSlab_400Regular",
     textAlign: "center",
   },
 
@@ -113,6 +118,7 @@ export const styles = StyleSheet.create({
   },
 
   footerText: {
+    fontFamily: "ZillaSlab_700Bold",
     paddingLeft: 100,
     color: "#8B0000",
   },

@@ -1,3 +1,4 @@
+import {useFonts,ZillaSlab_400Regular,ZillaSlab_700Bold} from "@expo-google-fonts/zilla-slab";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useState } from "react";
@@ -14,6 +15,9 @@ const tipos = ["Cachorro", "Gato", "Passaro", "Peixe", "Coelho", "Hamster"];
 const sexos = ["Macho", "Fêmea"];
 
 export const CadastroPet = () => {
+
+  useFonts({ZillaSlab_400Regular,ZillaSlab_700Bold});
+
   const navigation = useNavigation();
   const [customAlertVisible, setCustomAlertVisible] = useState<boolean>(false);
   const [alertData, setAlertData] = useState<{title: string; message: string;}>({ title: "", message: ""});

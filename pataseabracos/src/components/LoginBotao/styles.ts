@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   botao: {
+    
     width: 320,
     height: 60,
     margin: 12,
@@ -14,8 +15,9 @@ export const styles = StyleSheet.create({
   },
 
   titulo: {
+    fontFamily: "ZillaSlab_700Bold",
     fontSize: 20,
-    fontWeight: "bold",
+    
     color: "#311A05",
   },
 });
