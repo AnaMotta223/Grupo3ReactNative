@@ -72,10 +72,8 @@ export const AuthProvider = ({ children }: any) => {
       await AsyncStorage.setItem("@Animal", jsonValueAnimal);
       await AsyncStorage.setItem("@Cadastros", jsonValueAnimaisCadastrados);
 
-      // const jsonValueUser = JSON.stringify({username, adocoes});
-      // await AsyncStorage.setItem('@User', jsonValueUser);
     } catch (error) {
-      console.log("Erro ao salvar dados!");
+      return null
     }
   };
 

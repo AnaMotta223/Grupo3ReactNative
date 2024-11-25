@@ -89,7 +89,7 @@ export const Mensagens = () => {
                 <Image style={styles.messageIcon} source={item.icon} />
                 <View>
                   <Text style={styles.messageName}>{item.name}</Text>
-                  <Text style={styles.messageText}>{item.message.slice(0, 50)}...</Text>  {/*Mostra só uma parte da mensagem no card*/}
+                  <Text style={styles.messageText}>{item.message.slice(0, 50)}...</Text>  
                   <TouchableOpacity style={styles.popupButton} onPress={() => openModal(item)}>
                     <Text style={styles.popupButtonText}>Ler Mais</Text>
                   </TouchableOpacity>
