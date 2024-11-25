@@ -1,5 +1,6 @@
 import {
   ActivityIndicator,
+  Alert,
   Button,
   FlatList,
   Image,
@@ -35,7 +36,13 @@ interface ResponseApi {
   id: number;
   nome: string;
   raca: string;
+  idade: string;
+  peso: string;
   tipo: string;
+  sexo: string;
+  observacao: string;
+  localidade: string;
+  usernameDono: string;
 }
 
 const Tab = createBottomTabNavigator();
@@ -50,6 +57,17 @@ export const Home = () => {
     ZillaSlab_400Regular,
     ZillaSlab_700Bold,
   });
+
+  const handleMais = (idade: string, peso: string, sexo: string, observacao: string, localidade: string, usernameDono: string) => {
+    idade === "" || null ? idade = "Não informada" : idade
+    peso === "" || null ? peso = "Não informado" : peso
+    sexo === "M" ? sexo = "Macho" : "Fêmea";
+    sexo === "F" ? sexo = "Fêmea" : "Macho";
+    observacao === "" || null ? observacao = "Não informada" : observacao
+    localidade === "" || null ? localidade = "Não informada" : localidade
+    usernameDono === "" || null ? usernameDono = "Não informado" : usernameDono
+    Alert.alert('Informações adicionais',`Idade: ${idade}\nPeso: ${peso}\nSexo: ${sexo}\nObservacao: ${observacao}\nLocalidade: ${localidade}\nUsername dono temporário: ${usernameDono}`)
+  }
 
   const handleInputChange = (value: string) => {
     setBusca(value);
@@ -206,6 +224,12 @@ export const Home = () => {
                         onPress={() => handleAdocoes(item)}
                       >
                         <Text style={styles.txtAdotar}>Adotar</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.btnAdotar}
+                        onPress={() => handleMais(item.idade, item.peso, item.sexo, item.observacao, item.localidade, item.usernameDono)}
+                      >
+                        <Text style={styles.txtAdotar}>Mais</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
