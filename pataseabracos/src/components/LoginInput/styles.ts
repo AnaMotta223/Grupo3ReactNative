@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   input: {
+    fontFamily: "ZillaSlab_400Regular",
     width: 320,
     height: 50,
     margin: 8,

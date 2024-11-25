@@ -31,8 +31,8 @@ export const styles = StyleSheet.create({
   },
 
   titulo: {
+    fontFamily: "ZillaSlab_700Bold",
     fontSize: 30,
-    fontWeight: "bold",
     margin: 25,
   },
 });

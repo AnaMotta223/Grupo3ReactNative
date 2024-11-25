@@ -32,8 +32,9 @@ export const styles = StyleSheet.create({
   },
 
   titulo: {
+    fontFamily: "ZillaSlab_700Bold",
     fontSize: 27,
-    fontWeight: "bold",
+    
   },
 
   espacamento: {

@@ -13,6 +13,7 @@ import peixe from "../../assets/peixeCard.png";
 import { PropsApi, useAuth } from "../../hooks/useAuth";
 import { ServiceGetAnimais } from "../../service/ServiceGetAnimais";
 import { styles } from "./style";
+
 interface ResponseApi {
   id: number;
   nome: string;
@@ -59,6 +60,8 @@ export const Home = () => {
     }
     setIsloading(false);
   };
+
+  
 
   useEffect(() => {
     loadApi();

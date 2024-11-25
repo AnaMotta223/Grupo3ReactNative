@@ -1,3 +1,4 @@
+import {useFonts,ZillaSlab_400Regular,ZillaSlab_700Bold} from "@expo-google-fonts/zilla-slab";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -16,6 +17,9 @@ interface PropsApi {
 }
 
 export const Cadastrar = () => {
+
+  useFonts({ZillaSlab_400Regular,ZillaSlab_700Bold});
+
   const navigation = useNavigation();
   const [nome, setNome] = useState<string>("");
   const [username, setUsername] = useState<string>("");

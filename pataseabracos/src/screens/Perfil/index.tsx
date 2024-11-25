@@ -1,15 +1,8 @@
+import {useFonts,ZillaSlab_400Regular,ZillaSlab_700Bold} from "@expo-google-fonts/zilla-slab";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
-import {
-  Alert,
-  Image,
-  ImageBackground,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import {Alert, Image, ImageBackground, ScrollView, Text, TouchableOpacity, View, } from "react-native";
 import Perfil from "../../assets/fotoPerfil.png";
 import Fundo from "../../assets/fundoClaro2.jpg";
 import GatoFundo from "../../assets/gatoFundo.png";
@@ -19,6 +12,9 @@ import { useAuth } from "../../hooks/useAuth";
 import { styles } from "./style";
 
 export const PerfilUsuario = () => {
+
+  useFonts({ZillaSlab_400Regular,ZillaSlab_700Bold});
+  
   //Parte das navegações
   const navigation = useNavigation();
   // Parte dos cards
